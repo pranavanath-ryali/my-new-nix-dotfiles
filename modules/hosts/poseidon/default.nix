@@ -1,15 +1,15 @@
 { inputs, pkgs, self, ... }:
 {
-    flake.nixosConfigurations.zeus = inputs.nixpkgs.lib.nixosSystem {
+    flake.nixosConfigurations.poseidon = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
             inherit self;
             inherit inputs;
         };
         modules = [
-            self.nixosModules.zeusMachineModule
+            self.nixosModules.poseidonMachineModule
 
-            self.nixosModules.zeusGpuDriversModule
+            self.nixosModules.poseidonGpuDriversModule
             self.nixosModules.bluetoothModule
             self.nixosModules.printingModule
             self.nixosModules.pipewireModule
@@ -22,13 +22,13 @@
         ];
     };
 
-    flake.nixosModules.zeusMachineModule = { inputs, pkgs, ... }: {
+    flake.nixosModules.poseidonMachineModule = { inputs, pkgs, ... }: {
         nixpkgs.config.allowUnfree = true;
 
         boot.loader.systemd-boot.enable = true;
         boot.loader.efi.canTouchEfiVariables = true;
 
-        networking.hostName = "zeus";
+        networking.hostName = "poseidon";
         networking.networkmanager.enable = true;
 
         time.timeZone = "Asia/Kolkata";
@@ -58,8 +58,6 @@
         # };
 
         nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-        programs.firefox.enable = true;
         
         users.users.pranavanathryali = {
             isNormalUser = true;
