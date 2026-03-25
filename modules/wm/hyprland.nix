@@ -3,6 +3,7 @@
     flake.nixosModules.hyprlandModule = { self, inputs, pkgs, ... }: {
         imports = [
             self.poseidonBatteryOptimizations
+            self.poseidonDisplayModule
         ];
 
         environment.systemPackages = [ pkgs.wayland ];
