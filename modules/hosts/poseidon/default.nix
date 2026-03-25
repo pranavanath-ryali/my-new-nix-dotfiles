@@ -16,7 +16,7 @@
 
             self.nixosModules.basePackages
             self.nixosModules.syncthingModule
-            self.nixosModules.flatpakModule
+            # self.nixosModules.flatpakModule
 
             self.nixosModules.caelestiaHyprlandModule
         ];
@@ -47,18 +47,8 @@
             LC_TIME = "en_IN";
         };
 
-        # services.xserver.enable = true;
-
-        # services.xserver.displayManager.gdm.enable = true;
-        # services.xserver.desktopManager.gnome.enable = true;
-
-        # services.xserver.xkb = {
-        #     layout = "us";
-        #     variant = "colemak_dh";
-        # };
-
         nix.settings.experimental-features = [ "nix-command" "flakes" ];
-        
+
         users.users.pranavanathryali = {
             isNormalUser = true;
             description = "pranavanathryali";
@@ -68,4 +58,3 @@
         system.stateVersion = "25.11";
     };
 }
-

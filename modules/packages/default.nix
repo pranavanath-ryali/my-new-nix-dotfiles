@@ -10,6 +10,9 @@
         environment.systemPackages = with pkgs; [
             zed-editor
 
+            powertop
+            nvme-cli
+
             btop
             htop
             ranger
@@ -54,6 +57,7 @@
             self.homeModules.musicModule
             self.homeModules.kdeConnectModule
             self.homeModules.nvfModule
+            self.homeModules.mpvModule
         ];
 
         home.packages = with pkgs; [

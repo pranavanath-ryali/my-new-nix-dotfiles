@@ -1,6 +1,10 @@
 { inputs, ... }:
 {
-    flake.nixosModules.hyprlandModule = { inputs, pkgs, ... }: {
+    flake.nixosModules.hyprlandModule = { self, inputs, pkgs, ... }: {
+        imports = [
+            self.poseidonBatteryOptimizations
+        ];
+
         environment.systemPackages = [ pkgs.wayland ];
         services.xserver = {
             enable = true;
@@ -16,15 +20,13 @@
             portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
         };
 
+        services.displayManager.gdm.enable = true;
         services.gnome.gnome-keyring.enable = true;
 
         # Mountable Drives
         services.devmon.enable = true;
         services.gvfs.enable = true;
         services.udisks2.enable = true;
-
-        # Upower
-        services.upower.enable = true;
     };
 
     flake.homeModules.hyprlandModule = { self, inputs, pkgs, ... }: {
@@ -110,6 +112,8 @@
 
                     "$mainMod, F11, fullscreen,"
                     "$mainMod SHIFT, F11, fullscreenstate, 0 2"
+
+                    "$mainMod, F1, exec, bash /home/pranavanathryali/hyprland_battery.sh"
 
                     # TODO: Screenshots
                     "$mainMod SHIFT, PRINT, exec, hyprshot -m region -o /home/pranavanathryali/Pictures/Screenshots/" # TODO: Declare a global username variable
@@ -197,6 +201,33 @@
                     };
                 };
             };
+        };
+
+        home.file."/home/pranavanathryali/hyprland_battery.sh" = {
+            executable = true;
+            text = ''
+#!/usr/bin/env sh
+HYPRGAMEMODE=$(hyprctl getoption animations:enabled | awk 'NR==1{print $2}')
+if [ "$HYPRGAMEMODE" = 1 ] ; then
+    hyprctl --batch "\
+        keyword animations:enabled 0;\
+        keyword animation borderangle,0; \
+        keyword decoration:shadow:enabled 0;\
+        keyword decoration:blur:enabled 0;\
+        keyword decoration:fullscreen_opacity 1;\
+        keyword general:gaps_in 0;\
+        keyword general:gaps_out 0;\
+        keyword general:border_size 1;\
+        keyword decoration:rounding 0"
+    hyprctl notify 1 5000 "rgb(40a02b)" "Gamemode [ON]"
+    exit
+else
+    hyprctl notify 1 5000 "rgb(d20f39)" "Gamemode [OFF]"
+    hyprctl reload
+    exit 0
+fi
+exit 1
+            '';
         };
     };
 }
