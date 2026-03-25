@@ -39,6 +39,8 @@
 
         home.packages = with pkgs; [
             gammastep
+            brightnessctl
+            wireplumber
 
             hyprshot
         ];
@@ -179,8 +181,8 @@
                     ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-"
                     ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
                     ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-                    ",XF86MonBrightnessUp, exec, brightnessctl s 1%+"
-                    ",XF86MonBrightnessDown, exec, brightnessctl s 1%-"
+                    ",XF86MonBrightnessUp, exec, brightnessctl s 5%+"
+                    ",XF86MonBrightnessDown, exec, brightnessctl s 5%-"
                 ];
 
                 bindl = [
@@ -237,19 +239,5 @@ fi
 exit 1
             '';
         };
-
-        # services.gammastep = {
-        #     enable = true;
-        #     tray = true;
-        #     provider = "geoclue2";
-
-        #     temperature = {
-        #         day = 7000;
-        #         night = 3500;
-        #     };
-
-        #     # dawnTime = "4:00-5:00";
-        #     # duskTime = "23:35-00:00";
-        # };
     };
 }

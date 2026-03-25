@@ -22,14 +22,10 @@
     flake.homeModules.homeModule = { self, pkgs, ... }: {
         imports = [
             self.homeModules.basePackages
+
             self.homeModules.hyprlandModule
+            self.homeModules.riceDefaultHyprland
         ];
         programs.home-manager.enable = true;
-
-        home.packages = with pkgs; [
-            vim
-            neovim
-            obsidian
-        ];
     };
 }

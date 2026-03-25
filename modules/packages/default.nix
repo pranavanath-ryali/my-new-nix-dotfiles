@@ -63,23 +63,17 @@
         home.packages = with pkgs; [
             inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
 
+            lazygit
             wl-gammactl
+
+            vim
             neovim
             localsend
-            planify
-            lazygit
             vscode
-            # (pkgs.zed-editor.overrideAttrs (oldAttrs: {
-            #     buildInputs = (oldAttrs.buildInputs or []) ++ (with pkgs; [
-            #         nerd-fonts.caskaydia-cove
-            #         montserrat
-            #     ]);
-            # }))
-            ollama
+            obsidian
 
             libreoffice
-            # calibre
-            # obsidian
+            calibre
 
             easyeffects
             strawberry
