@@ -22,7 +22,7 @@
     flake.homeModules.homeModule = { self, pkgs, ... }: {
         imports = [
             self.homeModules.basePackages
-            self.homeModules.caelestiaHyprlandModule
+            self.homeModules.hyprlandModule
         ];
         programs.home-manager.enable = true;
 

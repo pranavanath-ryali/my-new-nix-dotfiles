@@ -1,0 +1,12 @@
+{ ... }:
+{
+    flake.homeModules.vicinaeModule = { inputs, ... }: {
+        imports = [
+            inputs.vicinae.homeManagerModules.default
+        ];
+
+        services.vicinae = {
+            enable = true;
+        };
+    };
+}

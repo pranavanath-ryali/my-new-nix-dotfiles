@@ -26,5 +26,8 @@
             ];
         };
         programs.kitty.shellIntegration.enableFishIntegration = true;
+        programs.kitty.extraConfig = ''
+shell fish
+        '';
     };
 }

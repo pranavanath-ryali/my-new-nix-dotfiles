@@ -27,6 +27,9 @@
 
         zen-browser.url = "github:youwen5/zen-browser-flake";
         zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+
+        # Vicinae
+        vicinae.url = "github:vicinaehq/vicinae";
     };
 
     outputs = inputs@{ flake-parts, import-tree, ... }:

@@ -19,7 +19,7 @@
             };
         };
 
-        services.logind = {
+        services.logind.settings.Login = {
             lidSwitch = "suspend";
             powerKey = "suspend";
         };

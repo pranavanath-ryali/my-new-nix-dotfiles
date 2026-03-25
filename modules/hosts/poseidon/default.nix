@@ -18,7 +18,7 @@
             self.nixosModules.syncthingModule
             # self.nixosModules.flatpakModule
 
-            self.nixosModules.caelestiaHyprlandModule
+            self.nixosModules.hyprlandModule
         ];
     };
 

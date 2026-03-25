@@ -2,8 +2,8 @@
 {
     flake.nixosModules.hyprlandModule = { self, inputs, pkgs, ... }: {
         imports = [
-            self.poseidonBatteryOptimizations
-            self.poseidonDisplayModule
+            self.nixosModules.poseidonBatteryOptimizations
+            self.nixosModules.poseidonDisplayModule
         ];
 
         environment.systemPackages = [ pkgs.wayland ];
@@ -34,9 +34,12 @@
         imports = [
             self.homeModules.kittyModule
             self.homeModules.fishModule
+            self.homeModules.vicinaeModule
         ];
 
         home.packages = with pkgs; [
+            gammastep
+
             hyprshot
         ];
 
@@ -47,6 +50,10 @@
             settings = {
                 monitor = [
                     ",preferred,auto,1.0"
+                ];
+
+                exec-once = [
+                    "gammastep -O 7250"
                 ];
 
                 input = {
@@ -230,5 +237,19 @@ fi
 exit 1
             '';
         };
+
+        # services.gammastep = {
+        #     enable = true;
+        #     tray = true;
+        #     provider = "geoclue2";
+
+        #     temperature = {
+        #         day = 7000;
+        #         night = 3500;
+        #     };
+
+        #     # dawnTime = "4:00-5:00";
+        #     # duskTime = "23:35-00:00";
+        # };
     };
 }
