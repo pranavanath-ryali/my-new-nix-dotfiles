@@ -30,6 +30,9 @@
 
         # Vicinae
         vicinae.url = "github:vicinaehq/vicinae";
+
+        # AWWW
+        inputs.awww.url = "git+https://codeberg.org/LGFae/awww";
     };
 
     outputs = inputs@{ flake-parts, import-tree, ... }:

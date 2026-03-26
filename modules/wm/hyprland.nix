@@ -31,12 +31,6 @@
     };
 
     flake.homeModules.hyprlandModule = { self, inputs, pkgs, ... }: {
-        imports = [
-            self.homeModules.kittyModule
-            self.homeModules.fishModule
-            self.homeModules.vicinaeModule
-        ];
-
         home.packages = with pkgs; [
             gammastep
             brightnessctl
@@ -116,8 +110,6 @@
                     "$mainMod, V, togglefloating,"
                     "$mainMod, T, togglesplit,"
 
-                    "$mainMod, SPACE, exec, vicinae toggle"
-
                     "$mainMod SHIFT, DELETE, exit"
 
                     "$mainMod, F11, fullscreen,"
@@ -128,10 +120,6 @@
                     # TODO: Screenshots
                     "$mainMod SHIFT, PRINT, exec, hyprshot -m region -o /home/pranavanathryali/Pictures/Screenshots/" # TODO: Declare a global username variable
                     ", PRINT, exec, hyprshot -m active -m output -o /home/pranavanathryali/Pictures/Screenshots/"
-
-                    # Application Bindings
-                    "$mainMod, RETURN, exec, kitty"
-                    "$mainMod, E, exec, nautilus"
 
                     "$mainMod, 1, workspace, 1"
                     "$mainMod, 2, workspace, 2"
