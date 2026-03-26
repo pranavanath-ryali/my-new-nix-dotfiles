@@ -5,6 +5,7 @@
             self.homeModules.kittyModule
             self.homeModules.fishModule
             self.homeModules.vicinaeModule
+            self.homeModules.awwwModule
         ];
 
         wayland.windowManager.hyprland.settings.bind = lib.mkAfter [

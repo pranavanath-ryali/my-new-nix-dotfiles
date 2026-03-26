@@ -1,6 +1,7 @@
 {
     inputs = {
         nixpkgs.url = "github:NixOS/nixpkgs/release-25.11";
+        nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
         flake-parts.url = "github:hercules-ci/flake-parts";
         import-tree.url = "github:vic/import-tree";
 
@@ -8,6 +9,9 @@
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
         hyprland.url = "github:hyprwm/Hyprland";
+
+        noctalia.url = "github:noctalia-dev/noctalia-shell";
+        noctilia.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
         illogical-flake.url = "github:soymou/illogical-flake";
 
@@ -32,7 +36,7 @@
         vicinae.url = "github:vicinaehq/vicinae";
 
         # AWWW
-        inputs.awww.url = "git+https://codeberg.org/LGFae/awww";
+        awww.url = "git+https://codeberg.org/LGFae/awww";
     };
 
     outputs = inputs@{ flake-parts, import-tree, ... }:

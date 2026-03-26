@@ -1,7 +1,7 @@
 { ... }:
 {
-    flake.homeModules.awwwModule = { inputs, ... }: {
-        environment.packages = [
+    flake.homeModules.awwwModule = { inputs, pkgs, lib, ... }: {
+        home.packages = [
             inputs.awww.packages.${pkgs.stdenv.hostPlatform.system}.awww
         ];
 
