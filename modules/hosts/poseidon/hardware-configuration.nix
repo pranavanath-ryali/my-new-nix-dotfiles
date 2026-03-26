@@ -18,10 +18,18 @@
             options = [ "fmask=0077" "dmask=0077" ];
         };
 
-        swapDevices = [ ];
+        swapDevices = [
+            {
+                device = "/var/lib/swapfile";
+                size = 18 * 1024;
+            }
+        ];
+
+        boot.kernelParams = ["resume_offset=3364864"];
+        boot.resumeDevice = "/dev/disk/by-uuid/6c25abb4-3a82-42df-8457-63c94430bce6";
+        powerManagement.enable = true;
 
         nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
         hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     };
 }
-

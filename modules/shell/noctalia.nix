@@ -1,7 +1,7 @@
 { ... }:
 {
-    flake.homeModules.noctaliaShellModule = { inputs, ... }: {
-        inputs = [
+    flake.homeModules.noctaliaShellModule = { inputs, lib, ... }: {
+        imports = [
             inputs.noctalia.homeModules.default
         ];
 
@@ -60,6 +60,28 @@
             #         };
             #     };
             # };
+        };
+
+        wayland.windowManager.hyprland.settings = {
+            exec-once = lib.mkAfter [
+                "noctalia-shell"
+            ];
+
+            "$ipc" = "noctalia-shell ipc call";
+            bind = lib.mkAfter [
+                "$mainMod, SPACE, exec, $ipc launcher toggle"
+            ];
+
+            bindel = lib.mkAfter [
+                ", XF86AudioRaiseVolume, exec, $ipc volume increase"
+                ", XF86AudioLowerVolume, exec, $ipc volume decrease"
+                ", XF86MonBrightnessUp, exec, $ipc brightness increase"
+                ", XF86MonBrightnessDown, exec, $ipc brightness decrease"
+            ];
+
+            bindl = lib.mkAfter [
+                ", XF86AudioMute, exec, $ipc volume muteOutput"
+            ];
         };
     };
 }

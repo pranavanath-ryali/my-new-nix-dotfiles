@@ -21,12 +21,19 @@
 
         services.logind.settings.Login = {
             lidSwitch = "suspend";
-            powerKey = "suspend";
+            powerKey = "hibernate";
         };
 
+
         boot.kernelParams = [
+            "mem_sleep_default=deep"
             "pcie_aspm=force"
             "pcie_aspm.policy=powersupersave"
         ];
+
+        systemd.sleep.extraConfig = ''
+            HibernateDelaySec=30m
+            SuspendState=mem
+        '';
     };
 }
