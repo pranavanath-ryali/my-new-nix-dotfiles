@@ -23,9 +23,7 @@
         imports = [
             self.homeModules.basePackages
 
-            self.homeModules.hyprlandModule
-            self.homeModules.noctaliaShellModule
-            self.homeModules.riceDefaultNoctalia
+            self.homeModules.defaultNoctaliaHyprland
         ];
         programs.home-manager.enable = true;
     };

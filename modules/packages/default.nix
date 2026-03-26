@@ -65,6 +65,7 @@
 
             lazygit
             wl-gammactl
+            imagemagick
 
             vim
             neovim

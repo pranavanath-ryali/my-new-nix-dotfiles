@@ -1,13 +1,14 @@
 { ... }:
 {
-    flake.homeModules.noctaliaShellModule = { inputs, lib, ... }: {
+    flake.homeModules.noctaliaShellModule = { self, inputs, lib, ... }: {
         imports = [
             inputs.noctalia.homeModules.default
+
+            self.homeModules.vicinaeModule
         ];
 
         programs.noctalia-shell = {
             enable = true;
-            settings = (builtins.fromJSON (builtins.readFile ../rice/default/noctalia.json)).settings;
             # settings = {
             #     # configure noctalia here
             #     bar = {
@@ -69,7 +70,11 @@
 
             "$ipc" = "noctalia-shell ipc call";
             bind = lib.mkAfter [
-                "$mainMod, SPACE, exec, $ipc launcher toggle"
+                # "$mainMod, SPACE, exec, $ipc launcher toggle"
+                "$mainMod, SPACE, exec, vicinae toggle"
+                "$mainMod, DELETE, exec, $ipc sessionMenu toggle"
+
+                "$mainMod, RETURN, exec, kitty"
             ];
 
             bindel = lib.mkAfter [
