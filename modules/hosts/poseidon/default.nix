@@ -18,7 +18,7 @@
             self.nixosModules.syncthingModule
             # self.nixosModules.flatpakModule
 
-            self.nixosModules.hyprlandModule
+            self.nixosModules.defaultNoctaliaHyprland
         ];
     };
 

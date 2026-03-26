@@ -30,7 +30,7 @@
         services.udisks2.enable = true;
     };
 
-    flake.homeModules.hyprlandModule = { self, inputs, pkgs, ... }: {
+    flake.homeModules.hyprlandModule = { self, inputs, pkgs, lib, ... }: {
         home.packages = with pkgs; [
             gammastep
             brightnessctl
@@ -73,16 +73,6 @@
                     sensitivity = -0.2;
                 };
 
-                general = {
-                    layout = "scrolling";
-                };
-
-                scrolling = {
-                    fullscreen_on_one_column = true;
-                    column_width = 0.5;
-                    explicit_column_widths = "0.333, 0.5, 0.667, 1.0";
-                };
-
                 gestures = {
                     workspace_swipe_distance = 600;
                     workspace_swipe_min_speed_to_force = 30;
@@ -98,9 +88,34 @@
                     preserve_split = true;
                 };
 
-                animation = [
+
+                general = lib.mkDefault {
+                    layout = "scrolling";
+                };
+
+                scrolling = lib.mkDefault {
+                    fullscreen_on_one_column = true;
+                    column_width = 0.5;
+                    explicit_column_widths = "0.25, 0.333, 0.5, 0.667, 0.75, 1.0";
+                };
+
+                animation = lib.mkDefault [
                     "workspaces, 1, 5, default, slidevert"
                 ];
+
+                decoration = lib.mkDefault {
+                    rounding = 8;
+                    active_opacity = 0.94;
+                    inactive_opacity = 0.9;
+                    fullscreen_opacity = 1.0;
+
+                    blur = {
+                        enabled = true;
+                        size = 6;
+                        passes = 4;
+                        brightness = 0.725;
+                    };
+                };
 
                 "$mainMod" = "SUPER";
                 bind = [
@@ -184,20 +199,6 @@
                     "$mainMod, mouse:272, movewindow"
                     "$mainMod, mouse:273, resizewindow"
                 ];
-
-                decoration = {
-                    rounding = 8;
-                    active_opacity = 0.94;
-                    inactive_opacity = 0.9;
-                    fullscreen_opacity = 1.0;
-
-                    blur = {
-                        enabled = true;
-                        size = 6;
-                        passes = 4;
-                        brightness = 0.725;
-                    };
-                };
             };
         };
 

@@ -22,6 +22,7 @@
             pciutils
             ispell
             inotify-tools
+            libnotify
             wireplumber
             qjackctl
             pavucontrol
@@ -66,6 +67,8 @@
             lazygit
             wl-gammactl
             imagemagick
+            inotify-tools
+            libnotify
 
             vim
             neovim

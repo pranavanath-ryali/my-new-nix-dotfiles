@@ -19,12 +19,45 @@
         ];
     };
 
-    flake.homeModules.homeModule = { self, pkgs, ... }: {
+    flake.homeModules.homeModule = { self, pkgs, lib, hostName, ... }: {
         imports = [
             self.homeModules.basePackages
 
             self.homeModules.defaultNoctaliaHyprland
         ];
         programs.home-manager.enable = true;
+
+        home.file."/home/pranavanathryali/platform_power_profile.sh" = {
+            executable = true;
+            text = ''
+FILE="/sys/firmware/acpi/platform_profile"
+
+inotifywait -m -e modify "$FILE" --format '%w%f' | while read FILE_CHANGED
+do
+    PROFILE=$(cat "$FILE_CHANGED")
+
+    case "$PROFILE" in
+        low-power)
+            MSG="Power Saver Mode"
+            ;;
+        balanced)
+            MSG="Balanced Mode"
+            ;;
+        performance)
+            MSG="Performance Mode"
+            ;;
+        *)
+            MSG="Unknown mode: $PROFILE"
+            ;;
+    esac
+
+    notify-send "Lenovo Fn+Q" "$MSG"
+done
+            '';
+        };
+
+        wayland.windowManager.hyprland.settings.exec-once = lib.mkAfter [
+            "bash /home/pranavanathryali/platform_power_profile.sh"
+        ];
     };
 }
