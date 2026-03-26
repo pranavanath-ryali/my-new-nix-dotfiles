@@ -11,7 +11,7 @@
         hyprland.url = "github:hyprwm/Hyprland";
 
         noctalia.url = "github:noctalia-dev/noctalia-shell";
-        noctilia.inputs.nixpkgs.follows = "nixpkgs-unstable";
+        noctalia.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
         illogical-flake.url = "github:soymou/illogical-flake";
 

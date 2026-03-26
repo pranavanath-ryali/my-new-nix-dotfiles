@@ -24,6 +24,7 @@
             self.homeModules.basePackages
 
             self.homeModules.hyprlandModule
+            self.homeModules.noctaliaShellModule
             self.homeModules.riceDefaultHyprland
         ];
         programs.home-manager.enable = true;
