@@ -7,6 +7,7 @@
             self.nixosModules.steamModule
             self.nixosModules.waydroidModule
             self.nixosModules.flatpakModule
+            self.nixosModules.nixosContainerModule
         ];
 
         environment.systemPackages = with pkgs; [
