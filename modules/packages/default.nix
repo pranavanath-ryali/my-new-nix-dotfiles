@@ -5,6 +5,7 @@
             self.nixosModules.direnvModule
             self.nixosModules.kdeConnectModule
             self.nixosModules.steamModule
+            self.nixosModules.waydroidModule
         ];
 
         environment.systemPackages = with pkgs; [
