@@ -58,6 +58,7 @@
 
     flake.homeModules.basePackages = { self, pkgs, inputs, ... }: {
         imports = [
+            self.homeModules.heliumBrowserModule
             self.homeModules.musicModule
             self.homeModules.kdeConnectModule
             self.homeModules.nvfModule

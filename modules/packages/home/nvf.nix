@@ -28,6 +28,7 @@
                     enable = true;
                     inlayHints.enable = true;
                     lightbulb.enable = true;
+                    lspSignature.enable = true;
                     # lspSignature.enable = true;
                     lspkind.enable = true;
                     # mappings = {
@@ -47,12 +48,12 @@
                     # };
                 };
 
-                autocomplete.blink-cmp = {
+                autocomplete.nvim-cmp = {
                     enable = true;
-                    setupOpts = {
-                        completion.menu.auto_show = true;
-                        signature.enabled = true;
-                    };
+                    # setupOpts = {
+                    #     completion.menu.auto_show = true;
+                    #     signature.enabled = true;
+                    # };
                 };
 
                 languages = {
@@ -90,9 +91,22 @@
                 utility = {
                     direnv.enable = true;
                     oil-nvim.gitStatus.enable = true;
+                    sleuth.enable = true;
+                };
+
+                ui = {
+                    borders.enable = true;
+                    borders.globalStyle = "rounded";
+                };
+
+                visuals = {
+                    nvim-web-devicons.enable = true;
+                    blink-indent.enable = true;
+                    fidget-nvim.enable = true;
                 };
 
                 ui.noice.enable = true;
+                autopairs.nvim-autopairs.enable = true;
 
                 # statusline.lualine.enable = true;
             };

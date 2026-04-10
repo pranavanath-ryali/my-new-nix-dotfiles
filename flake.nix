@@ -29,8 +29,13 @@
         nvf.url = "github:NotAShelf/nvf";
         nvf.inputs.nixpkgs.follows = "nixpkgs";
 
+        # Zen Browser
         zen-browser.url = "github:youwen5/zen-browser-flake";
         zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+
+        # Helium Browser
+        helium.url = "github:schembriaiden/helium-browser-nix-flake";
+        helium.inputs.nixpkgs.follows = "nixpkgs";
 
         # Vicinae
         vicinae.url = "github:vicinaehq/vicinae";

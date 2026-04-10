@@ -13,6 +13,7 @@
                 background_opacity = 1.0;
                 cursor_trail = 1;
                 hide_window_decorations = true;
+                adjust_line_height = "2px";
             };
         };
     };
