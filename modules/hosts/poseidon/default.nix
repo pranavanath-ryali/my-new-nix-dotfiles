@@ -1,12 +1,15 @@
-{ inputs, pkgs, self, ... }:
+{ inputs, chaotic, pkgs, self, ... }:
 {
     flake.nixosConfigurations.poseidon = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
             inherit self;
             inherit inputs;
+            inherit chaotic;
         };
         modules = [
+            inputs.chaotic.nixosModules.default
+
             self.nixosModules.poseidonMachineModule
 
             self.nixosModules.poseidonGpuDriversModule
@@ -54,6 +57,34 @@
             description = "pranavanathryali";
             extraGroups = [ "networkmanager" "wheel" ];
         };
+
+        boot.kernelPackages = pkgs.linuxPackages_cachyos;
+
+        # services.create_ap = {
+        #     enable = true;
+        #     settings = {
+        #         WIFI_IFACE = "wlp0s20f3";
+        #         INTERNET_IFACE = "wlp0s20f3"; # Sharing WiFi to WiFi (if supported)
+        #         SSID = "PoseidonAP";
+        #         PASSPHRASE = "qwerty1234";
+        #         # FREQ_BAND = "2.4";
+
+        #         FREQ_BAND = "5";
+        #         CHANNEL = "153";
+        #     };
+        # };
+        # boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
+
+        # # Open the firewall for DHCP and DNS
+        # networking.firewall.allowedUDPPorts = [ 53 67 ];
+        # networking.firewall.allowedTCPPorts = [ 53 ];
+
+        # services.sunshine = {
+        #     enable = true;
+        #     autoStart = true;
+        #     capSysAdmin = true;
+        #     openFirewall = true;
+        # };
 
         system.stateVersion = "25.11";
     };

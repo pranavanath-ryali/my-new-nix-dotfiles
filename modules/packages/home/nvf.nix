@@ -11,10 +11,11 @@
                 lineNumberMode = "relative";
                 options = {
                     visualbell = false;
-                    autoindent = true;
                     cursorlineopt = "line";
                     mouse = "a";
+                    autoindent = true;
                     shiftwidth = 4;
+                    expandtab = true;
                     tabstop = 4;
                     signcolumn = "yes";
                     wrap = false;

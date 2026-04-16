@@ -607,7 +607,7 @@
       "monitors": []
     },
     "audio": {
-      "volumeStep": 5,
+      "volumeStep": 1,
       "volumeOverdrive": true,
       "spectrumFrameRate": 60,
       "visualizerType": "linear",

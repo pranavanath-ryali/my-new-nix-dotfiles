@@ -5,6 +5,8 @@
         flake-parts.url = "github:hercules-ci/flake-parts";
         import-tree.url = "github:vic/import-tree";
 
+        chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+
         home-manager.url = "github:nix-community/home-manager/release-25.11";
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -12,15 +14,6 @@
 
         noctalia.url = "github:noctalia-dev/noctalia-shell";
         noctalia.inputs.nixpkgs.follows = "nixpkgs-unstable";
-
-        illogical-flake.url = "github:soymou/illogical-flake";
-
-        caelestia-shell = {
-            url = "github:caelestia-dots/shell";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
-        caelestia-cli.url = "github:caelestia-dots/cli";
-        caelestia-cli.inputs.nixpkgs.follows = "nixpkgs";
 
         # NixVim
         nixvim.url = "github:nix-community/nixvim";
@@ -44,7 +37,7 @@
         awww.url = "git+https://codeberg.org/LGFae/awww";
     };
 
-    outputs = inputs@{ flake-parts, import-tree, ... }:
+    outputs = inputs@{ chaotic, flake-parts, import-tree, ... }:
         flake-parts.lib.mkFlake { inherit inputs; }
             (import-tree ./modules);
 }

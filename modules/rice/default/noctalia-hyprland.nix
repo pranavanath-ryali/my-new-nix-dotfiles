@@ -78,9 +78,12 @@
             ];
         };
 
-        programs.kitty.settings = {
+        programs.kitty.settings = lib.mkAfter {
             window_padding_width = "10 12";
             background_opacity = 0.775;
+            cursor_trail = 1;
+            hide_window_decorations = true;
+            "modify_font cell_height" = "120%";
         };
     };
 }

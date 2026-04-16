@@ -45,7 +45,9 @@
             portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
             settings = {
                 monitor = [
-                    ",preferred,auto,1.0"
+                    "eDP-1,preferred,0x0,1.0"
+
+                    "HEADLESS-2, 2360x1640@60, 1920x0, 1.0"
                 ];
 
                 exec-once = [

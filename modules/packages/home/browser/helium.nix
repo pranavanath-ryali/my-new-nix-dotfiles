@@ -1,8 +1,12 @@
 { ... }:
 {
-    flake.homeModules.heliumBrowserModule = { inputs, ... }: {
+    flake.homeModules.heliumBrowserModule = { inputs, pkgs, lib, ... }: {
         home.packages = [
-            inputs.helium.packages.${system}.default
+            inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default
+        ];
+
+        wayland.windowManager.hyprland.settings.bind = lib.mkAfter [
+            "$mainMod, B, exec, helium"
         ];
     };
 }
