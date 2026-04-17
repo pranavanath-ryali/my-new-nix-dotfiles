@@ -1,15 +1,24 @@
 {...}: {
-  flake.nixosModules.virtualizationModule = {pkgs, ...}: {
-    programs.virt-manager.enable = true;
-    users.groups.libvirtd.members = ["pranavanathryali"];
+    flake.nixosModules.virtualizationModule = {pkgs, ...}: {
+        programs.virt-manager.enable = true;
 
-    virtualisation.libvirtd.enable = true;
-    virtualisation.spiceUSBRedirection.enable = true;
+        users.groups.libvirtd.members = ["pranavanathryali"];
+        users.groups.kvm.members = [ "pranavanathryali" ];
 
-    environment.systemPackages = with pkgs; [
-      qemu
-    ];
+        virtualisation = {
+            libvirtd.enable = true;
+            libvirtd.qemu = {
+                swtpm.enable = true;
+            };
+            spiceUSBRedirection.enable = true;
+        };
 
-    users.users.pranavanathryali.extraGroups = ["libvirtd"];
-  };
+        environment.systemPackages = with pkgs; [
+            qemu
+            dnsmasq
+            phodav
+        ];
+
+        users.users.pranavanathryali.extraGroups = ["libvirtd"];
+    };
 }

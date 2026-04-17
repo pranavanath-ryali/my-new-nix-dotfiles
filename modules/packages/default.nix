@@ -12,6 +12,7 @@
       self.nixosModules.flatpakModule
       self.nixosModules.nixosContainerModule
       self.nixosModules.virtualizationModule
+      self.nixosModules.nhModule
     ];
 
     environment.systemPackages = with pkgs; [
@@ -113,5 +114,9 @@
         ];
       })
     ];
+
+    networking.firewall = {
+      allowedTCPPorts = [ 53317 ];
+    };
   };
 }
