@@ -9,6 +9,7 @@
             libvirtd.enable = true;
             libvirtd.qemu = {
                 swtpm.enable = true;
+                vhostUserPackages = [ pkgs.virtiofsd ];
             };
             spiceUSBRedirection.enable = true;
         };
@@ -17,6 +18,8 @@
             qemu
             dnsmasq
             phodav
+
+            virt-viewer
         ];
 
         users.users.pranavanathryali.extraGroups = ["libvirtd"];

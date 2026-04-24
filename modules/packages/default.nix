@@ -53,6 +53,10 @@
 
       adw-gtk3
       papirus-icon-theme
+
+      usbutils
+      python312
+      python312Packages.pyusb
     ];
 
     fonts.packages = with pkgs; [
@@ -72,6 +76,7 @@
     ...
   }: {
     imports = [
+      self.homeModules.direnvModule
       self.homeModules.heliumBrowserModule
       self.homeModules.musicModule
       self.homeModules.kdeConnectModule
@@ -114,9 +119,5 @@
         ];
       })
     ];
-
-    networking.firewall = {
-      allowedTCPPorts = [ 53317 ];
-    };
   };
 }

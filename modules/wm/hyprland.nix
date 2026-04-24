@@ -125,7 +125,6 @@
                     "$mainMod, Q, killactive,"
                     "$mainMod, M, layoutmsg, colresize 1.0"
                     "$mainMod, V, togglefloating,"
-                    "$mainMod, T, togglesplit,"
 
                     "$mainMod SHIFT, DELETE, exit"
 

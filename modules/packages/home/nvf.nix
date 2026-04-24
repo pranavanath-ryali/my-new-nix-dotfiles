@@ -9,17 +9,17 @@
             enable = true;
             settings.vim = {
                 lineNumberMode = "relative";
+
+                viAlias = true;
+                vimAlias = true;
+
                 options = {
-                    visualbell = false;
-                    cursorlineopt = "line";
-                    mouse = "a";
-                    autoindent = true;
-                    shiftwidth = 4;
                     expandtab = true;
+                    shiftwidth = 4;
                     tabstop = 4;
                     signcolumn = "yes";
-                    wrap = false;
                 };
+
                 globals = {
                     mapleader = " ";
                     maplocalleader = " ";
@@ -27,51 +27,15 @@
 
                 lsp = {
                     enable = true;
-                    inlayHints.enable = true;
-                    lightbulb.enable = true;
-                    lspSignature.enable = true;
-                    # lspSignature.enable = true;
-                    lspkind.enable = true;
-                    # mappings = {
-                    #     codeAction = "<leader>la";
-                    #     documentHighlight = "<leader>ldh";
-                    #     format = "<leader>lf";
-                    #     goToDeclaration = "lgD";
-                    #     goToDefinition = "lgd";
-                    #     hover = "lh";
-                    #     listDocumentSymbols = "lS";
-                    #     listImplementations = "lgi";
-                    #     listWorkspaceSymbols = "<leader>lws";
-                    #     nextDiagnostic = "<leader>lgn";
-                    #     openDiagnosticFloat = "<leader>le";
-                    #     previousDiagnostic = "<leader>lgp";
-                    #     renameSymbol = "<leader>ln";
-                    # };
                 };
 
                 autocomplete.nvim-cmp = {
                     enable = true;
-                    # setupOpts = {
-                    #     completion.menu.auto_show = true;
-                    #     signature.enabled = true;
-                    # };
                 };
 
                 languages = {
                     clang.enable = true;
-                    rust = {
-                        enable = true;
-                        # lsp.enable = true;
-                        treesitter.enable = true;
-
-                        format.enable = true;
-
-                        extensions.crates-nvim.enable = true;
-                        extensions.crates-nvim.setupOpts.completion.crates.enabled = true;
-                        extensions.crates-nvim.setupOpts.lsp.actions = true;
-                        extensions.crates-nvim.setupOpts.lsp.completion = true;
-                        extensions.crates-nvim.setupOpts.lsp.hover = true;
-                    };
+                    python.enable = true;
                 };
 
                 telescope = {
