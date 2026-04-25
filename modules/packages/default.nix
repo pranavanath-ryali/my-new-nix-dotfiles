@@ -81,6 +81,7 @@
       self.homeModules.musicModule
       self.homeModules.kdeConnectModule
       self.homeModules.nvfModule
+      self.homeModules.neovideModule
       self.homeModules.mpvModule
     ];
 
