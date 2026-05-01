@@ -47,7 +47,9 @@
         # self.nixosModules.defaultNoctaliaHyprland
       ]
       # Load wm
-      ++ lib.optional (globalSettings.wm == "hyprland") self.nixosModules.hyprlandModule;
+      ++ lib.optional (globalSettings.wm == "hyprland") self.nixosModules.hyprlandModule
+      # Load rices
+      ++ lib.optional (globalSettings.rice == "pitch-black") self.nixosModules.pitchBlackRice;
 
       nixpkgs.config.allowUnfree = true;
 

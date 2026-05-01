@@ -45,7 +45,7 @@
         _module.args = {
             globalSettings = {
                 wm = "hyprland";
-                rice = "default-noctalia";
+                rice = "pitch-black";
             };
         };
     };
