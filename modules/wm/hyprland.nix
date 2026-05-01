@@ -178,6 +178,10 @@
               default = [ ];
               type = types.listOf types.str;
             };
+            bindel = mkOption {
+              default = [ ];
+              type = types.listOf types.str;
+            };
           };
         };
         default = { };
@@ -325,7 +329,7 @@
               ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
               # ",XF86MonBrightnessUp, exec, brightnessctl s 5%+"
               # ",XF86MonBrightnessDown, exec, brightnessctl s 5%-"
-            ];
+            ] ++ config.dotfiles.hyprland.bindel;
 
             bindl = [
               ", XF86AudioNext, exec, playerctl next"

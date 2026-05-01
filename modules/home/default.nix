@@ -34,7 +34,9 @@
         # self.homeModules.defaultNoctaliaHyprland
       ]
       # Load wm
-      ++ lib.optional (globalSettings.wm == "hyprland") self.homeModules.hyprlandModule;
+      ++ lib.optional (globalSettings.wm == "hyprland") self.homeModules.hyprlandModule
+      # Load rice
+      ++ lib.optional (globalSettings.rice == "pitch-black") self.homeModules.pitchBlackRice;
 
       programs.home-manager.enable = true;
 
