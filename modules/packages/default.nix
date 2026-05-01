@@ -6,7 +6,6 @@
   }: {
     imports = [
       self.nixosModules.direnvModule
-      self.nixosModules.kdeConnectModule
       self.nixosModules.steamModule
       self.nixosModules.waydroidModule
       self.nixosModules.flatpakModule
@@ -16,8 +15,6 @@
     ];
 
     environment.systemPackages = with pkgs; [
-      linux-wifi-hotspot
-
       zed-editor
 
       powertop
@@ -53,10 +50,6 @@
 
       adw-gtk3
       papirus-icon-theme
-
-      usbutils
-      python312
-      python312Packages.pyusb
     ];
 
     fonts.packages = with pkgs; [
@@ -79,15 +72,13 @@
       self.homeModules.direnvModule
       self.homeModules.heliumBrowserModule
       self.homeModules.musicModule
-      self.homeModules.kdeConnectModule
       self.homeModules.nvfModule
       self.homeModules.neovideModule
       self.homeModules.mpvModule
+      self.homeModules.prismLauncherModule
     ];
 
     home.packages = with pkgs; [
-      inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-
       lazygit
       wl-gammactl
       imagemagick
@@ -96,6 +87,7 @@
 
       vim
       neovim
+      ollama
       localsend
       vscode
       obsidian
@@ -109,16 +101,6 @@
 
       bottles
       discord
-      (prismlauncher.override {
-        # Add binary required by some mod
-        additionalPrograms = [ffmpeg];
-
-        # Change Java runtimes available to Prism Launcher
-        jdks = [
-          zulu8
-          zulu25
-        ];
-      })
     ];
   };
 }

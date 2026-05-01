@@ -37,7 +37,16 @@
         awww.url = "git+https://codeberg.org/LGFae/awww";
     };
 
-    outputs = inputs@{ chaotic, flake-parts, import-tree, ... }:
-        flake-parts.lib.mkFlake { inherit inputs; }
-            (import-tree ./modules);
+    outputs = inputs@{ chaotic, flake-parts, import-tree, ... }: 
+    flake-parts.lib.mkFlake { inherit inputs; }
+    {
+        imports = [ (import-tree ./modules) ];
+
+        _module.args = {
+            globalSettings = {
+                wm = "hyprland";
+                rice = "default-noctalia";
+            };
+        };
+    };
 }

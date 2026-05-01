@@ -1,9 +1,11 @@
 { ... }:
 {
-    flake.nixosModules.defaultNoctaliaHyprland = { self, ... }: {
-        imports = [
-            self.nixosModules.hyprlandModule
-        ];
+    flake.nixosModules.defaultNoctaliaHyprland = { self, config, lib, globalSettings, ... }: {
+        # config = lib.mkIf (globalSettings.wm == "hyprland") {
+            imports = [
+                self.nixosModules.hyprlandModule
+            ];
+        # };
     };
 
     flake.homeModules.defaultNoctaliaHyprland = { self, lib, ... }: {

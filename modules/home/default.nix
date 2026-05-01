@@ -1,63 +1,74 @@
-{ inputs, self, ... }:
+{ inputs, self, globalSettings, lib, ... }:
 {
-    flake.homeConfigurations.pranavanathryali = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = import inputs.nixpkgs {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-        };
-        extraSpecialArgs = {
-            inherit self;
-            inherit inputs;
-        };
-        modules = [
-            self.homeModules.homeModule
-            {
-                home.username = "pranavanathryali";
-                home.homeDirectory = "/home/pranavanathryali";
-                home.stateVersion = "25.11";
-            }
-        ];
+  flake.homeConfigurations.pranavanathryali = inputs.home-manager.lib.homeManagerConfiguration {
+    pkgs = import inputs.nixpkgs {
+      system = "x86_64-linux";
+      config.allowUnfree = true;
     };
+    extraSpecialArgs = {
+      inherit self;
+      inherit inputs;
+    };
+    modules = [
+      self.homeModules.homeModule
+      {
+        home.username = "pranavanathryali";
+        home.homeDirectory = "/home/pranavanathryali";
+        home.stateVersion = "25.11";
+      }
+    ];
+  };
 
-    flake.homeModules.homeModule = { self, pkgs, lib, hostName, ... }: {
-        imports = [
-            self.homeModules.basePackages
+  flake.homeModules.homeModule =
+    {
+      self,
+      pkgs,
+      lib,
+      hostName,
+      ...
+    }:
+    {
+      imports = [
+        self.homeModules.basePackages
 
-            self.homeModules.defaultNoctaliaHyprland
-        ];
-        programs.home-manager.enable = true;
+        # self.homeModules.defaultNoctaliaHyprland
+      ]
+      # Load wm
+      ++ lib.optional (globalSettings.wm == "hyprland") self.homeModules.hyprlandModule;
 
-        home.file."/home/pranavanathryali/platform_power_profile.sh" = {
-            executable = true;
-            text = ''
-FILE="/sys/firmware/acpi/platform_profile"
+      programs.home-manager.enable = true;
 
-inotifywait -m -e modify "$FILE" --format '%w%f' | while read FILE_CHANGED
-do
-    PROFILE=$(cat "$FILE_CHANGED")
+      home.file."/home/pranavanathryali/platform_power_profile.sh" = {
+        executable = true;
+        text = ''
+          FILE="/sys/firmware/acpi/platform_profile"
 
-    case "$PROFILE" in
-        low-power)
-            MSG="Power Saver Mode"
-            ;;
-        balanced)
-            MSG="Balanced Mode"
-            ;;
-        performance)
-            MSG="Performance Mode"
-            ;;
-        *)
-            MSG="Unknown mode: $PROFILE"
-            ;;
-    esac
+          inotifywait -m -e modify "$FILE" --format '%w%f' | while read FILE_CHANGED
+          do
+              PROFILE=$(cat "$FILE_CHANGED")
 
-    notify-send "Lenovo Fn+Q" "$MSG"
-done
-            '';
-        };
+              case "$PROFILE" in
+                  low-power)
+                      MSG="Power Saver Mode"
+                      ;;
+                  balanced)
+                      MSG="Balanced Mode"
+                      ;;
+                  performance)
+                      MSG="Performance Mode"
+                      ;;
+                  *)
+                      MSG="Unknown mode: $PROFILE"
+                      ;;
+              esac
 
-        wayland.windowManager.hyprland.settings.exec-once = lib.mkAfter [
-            "bash /home/pranavanathryali/platform_power_profile.sh"
-        ];
+              notify-send "Lenovo Fn+Q" "$MSG"
+          done
+        '';
+      };
+
+      wayland.windowManager.hyprland.settings.exec-once = lib.mkAfter [
+        "bash /home/pranavanathryali/platform_power_profile.sh"
+      ];
     };
 }

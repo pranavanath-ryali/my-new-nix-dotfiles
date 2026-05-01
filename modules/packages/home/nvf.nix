@@ -31,7 +31,9 @@ vim.api.nvim_set_hl(0, "@keyword.return", { italic = true })
                 viAlias = true;
                 vimAlias = true;
 
+                options.autoindent = true;
                 options.expandtab = true;
+                options.smartindent = false;
                 options.shiftwidth = 4;
                 options.tabstop = 4;
                 options.signcolumn = "yes";
@@ -42,11 +44,19 @@ vim.api.nvim_set_hl(0, "@keyword.return", { italic = true })
                 treesitter = {
                     enable = true;
                     fold = true;
+                    indent.enable = false;
                 };
 
                 lsp = {
                     enable = true;
                     inlayHints.enable = true;
+                    mappings = {
+                        renameSymbol = "<F2>";
+                        codeAction = "<C-.>";
+                        goToDefinition = "<leader>gd";
+                        goToDeclaration = "<leader>gD";
+                        toggleFormatOnSave = "<leader>ltf";
+                    };
                 };
                 autocomplete.blink-cmp = {
                     enable = true;
@@ -63,6 +73,8 @@ vim.api.nvim_set_hl(0, "@keyword.return", { italic = true })
                         keymap = {
                             preset = "default";
 
+                            "<CR>" = [ "accept" "fallback" ];
+
                             "<Tab>" = [ "select_next" "snippet_forward" "fallback" ];
                             "<S-Tab>" = [ "select_prev" "snippet_backward" "fallback" ];
                         };
@@ -78,6 +90,9 @@ vim.api.nvim_set_hl(0, "@keyword.return", { italic = true })
                 };
 
                 languages = {
+                    odin = {
+                        enable = true;
+                    };
                     rust = {
                         enable = true;
                         extensions.crates-nvim.enable = true;
@@ -88,6 +103,10 @@ vim.api.nvim_set_hl(0, "@keyword.return", { italic = true })
                     clang.enable = true;
                     python.enable = true;
                     nix.enable = true;
+                };
+
+                formatter.conform-nvim = {
+                    enable = true;
                 };
 
                 telescope = {
@@ -119,7 +138,6 @@ vim.api.nvim_set_hl(0, "@keyword.return", { italic = true })
                 utility = {
                     direnv.enable = true;
                     oil-nvim.gitStatus.enable = true;
-                    sleuth.enable = true;
                 };
                 
                 statusline.lualine.enable = true;
@@ -145,7 +163,7 @@ vim.api.nvim_set_hl(0, "@keyword.return", { italic = true })
 
                 visuals = {
                     nvim-web-devicons.enable = true;
-                    blink-indent.enable = true;
+                    blink-indent.enable = false;
                     fidget-nvim.enable = true;
                 };
 
@@ -174,18 +192,26 @@ vim.api.nvim_set_hl(0, "@keyword.return", { italic = true })
 
 
                     {
-                        key = "<C-Tab>";
+                        key = "<C-1>";
                         mode = [ "n" ];
                         action = "<cmd>BufferLineCycleNext<CR>";
                         silent = true;
                         desc = "Buffer: CycleNext";
                     }
                     {
-                        key = "<C-S-Tab>";
+                        key = "<C-2>";
                         mode = [ "n" ];
                         action = "<cmd>BufferLineCyclePrev<CR>";
                         silent = true;
                         desc = "Buffer: CyclePrev";
+                    }
+
+                    {
+                        key = "<leader>f";
+                        mode = [ "n" ];
+                        action = "<cmd>lua require('conform').format()<CR>";
+                        silent = true;
+                        desc = "Format File";
                     }
                 ];
             };
