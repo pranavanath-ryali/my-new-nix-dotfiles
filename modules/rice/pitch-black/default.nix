@@ -29,16 +29,34 @@
       };
 
       fonts.packages = with pkgs; [
-        nerd-fonts.departure-mono
+        nerd-fonts.martian-mono
+        nerd-fonts.iosevka
       ];
     };
 
   flake.homeModules.pitchBlackRice =
-    { self, pkgs, ... }:
+    {
+      self,
+      pkgs,
+      config,
+      ...
+    }:
     {
       imports = [
         self.homeModules.hyprlandPitchBlackRice
-        self.homeModules.dunstModule
       ];
+
+      config.dotfiles.dunst = {
+        global = {
+          width = "350";
+          height = "(50, 350)";
+          offset = "(8, 8)";
+          origin = "top-right";
+          gap_size = 4;
+          transparency = 10;
+          frame_color = "#eceff1";
+          font = "MartianMono NF 8";
+        };
+      };
     };
 }

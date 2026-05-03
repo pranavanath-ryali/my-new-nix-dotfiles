@@ -13,6 +13,8 @@
         self.homeModules.fishModule
         self.homeModules.vicinaeModule
         self.homeModules.awwwModule
+        self.homeModules.dunstModule
+        self.homeModules.waybarModule
       ];
 
       config.home.packages = with pkgs; [
