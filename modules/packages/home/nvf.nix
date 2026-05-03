@@ -1,220 +1,272 @@
 { ... }:
 {
-    flake.homeModules.nvfModule = { inputs, pkgs, lib, ... }: {
-        imports = [
-            inputs.nvf.homeManagerModules.default
-        ];
+  flake.homeModules.nvfModule =
+    {
+      inputs,
+      pkgs,
+      lib,
+      ...
+    }:
+    {
+      imports = [
+        inputs.nvf.homeManagerModules.default
+      ];
 
-        programs.nvf = {
+      programs.nvf = {
+        enable = true;
+        settings.vim = {
+          startPlugins = with pkgs; [
+            vimPlugins.minuet-ai-nvim
+          ];
+
+          theme = {
             enable = true;
-            settings.vim = {
-                theme = {
-                    enable = true;
-                    name = "catppuccin";
-                    style = "mocha";
-                    transparent = true;
-                    extraConfig = ''
--- Standard keywords
-vim.api.nvim_set_hl(0, "Keyword", { italic = true })
-vim.api.nvim_set_hl(0, "Conditional", { italic = true })
-vim.api.nvim_set_hl(0, "Repeat", { italic = true })
+            name = "catppuccin";
+            style = "mocha";
+            transparent = true;
+            extraConfig = ''
+              -- Standard keywords
+              vim.api.nvim_set_hl(0, "Keyword", { italic = true })
+              vim.api.nvim_set_hl(0, "Conditional", { italic = true })
+              vim.api.nvim_set_hl(0, "Repeat", { italic = true })
 
--- Treesitter specific (covers Rust, C++, etc.)
-vim.api.nvim_set_hl(0, "@keyword", { italic = true })
-vim.api.nvim_set_hl(0, "@keyword.function", { italic = true })
-vim.api.nvim_set_hl(0, "@keyword.return", { italic = true })
-                    '';
-                };
+              -- Treesitter specific (covers Rust, C++, etc.)
+              vim.api.nvim_set_hl(0, "@keyword", { italic = true })
+              vim.api.nvim_set_hl(0, "@keyword.function", { italic = true })
+              vim.api.nvim_set_hl(0, "@keyword.return", { italic = true })
+            '';
+          };
 
-                lineNumberMode = "relative";
+          lineNumberMode = "relative";
 
-                viAlias = true;
-                vimAlias = true;
+          viAlias = true;
+          vimAlias = true;
 
-                options.autoindent = true;
-                options.expandtab = true;
-                options.smartindent = false;
-                options.shiftwidth = 4;
-                options.tabstop = 4;
-                options.signcolumn = "yes";
+          options.autoindent = true;
+          options.expandtab = true;
+          options.smartindent = false;
+          options.shiftwidth = 4;
+          options.tabstop = 4;
+          options.signcolumn = "yes";
 
-                globals.mapleader = " ";
-                globals.maplocalleader = " ";
+          globals.mapleader = " ";
+          globals.maplocalleader = " ";
 
-                treesitter = {
-                    enable = true;
-                    fold = true;
-                    indent.enable = false;
-                };
+          treesitter = {
+            enable = true;
+            fold = true;
+            indent.enable = false;
+          };
 
-                lsp = {
-                    enable = true;
-                    inlayHints.enable = true;
-                    mappings = {
-                        renameSymbol = "<F2>";
-                        codeAction = "<C-.>";
-                        goToDefinition = "<leader>gd";
-                        goToDeclaration = "<leader>gD";
-                        toggleFormatOnSave = "<leader>ltf";
+          lazy.plugins = {
+            minuet = {
+              package = pkgs.vimPlugins.minuet-ai-nvim;
+              setupModule = "minuet";
+              after = "print('hello. from minuet')";
+
+              setupOpts = {
+                provider = "openai_fim_compatible";
+                n_completions = 1;
+
+                context_window = 512;
+                provider_options = {
+                  openai_fim_compatible = {
+                    api_key = "TERM";
+                    name = "Ollama";
+                    end_point = "http://localhost:11434/v1/completions";
+                    model = "qwen2.5-coder:1.5b";
+                    optional = {
+                      max_tokens = 56;
+                      top_p = 0.9;
                     };
+                  };
                 };
-                autocomplete.blink-cmp = {
-                    enable = true;
-                    friendly-snippets.enable = true;
-                    mappings = {
-                        close = "<Esc>";
-                        complete = "<C-Space>";
-                        confirm = "<C-n>";
-
-                        scrollDocsDown = "<C-t>";
-                        scrollDocsUp = "<C-p>";
-                    };
-                    setupOpts = {
-                        keymap = {
-                            preset = "default";
-
-                            "<CR>" = [ "accept" "fallback" ];
-
-                            "<Tab>" = [ "select_next" "snippet_forward" "fallback" ];
-                            "<S-Tab>" = [ "select_prev" "snippet_backward" "fallback" ];
-                        };
-
-                        completion.documentation.auto_show = true;
-                        completion.documentation.auto_show_delay_ms = 200;
-
-                        completion.menu.auto_show = true;
-                    };
-                };
-                snippets.luasnip = {
-                    enable = true;
-                };
-
-                languages = {
-                    odin = {
-                        enable = true;
-                    };
-                    rust = {
-                        enable = true;
-                        extensions.crates-nvim.enable = true;
-                        format.enable = true;
-                        format.type = [ "rustfmt" ];
-                        treesitter.enable = true;
-                    };
-                    clang.enable = true;
-                    python.enable = true;
-                    nix.enable = true;
-                };
-
-                formatter.conform-nvim = {
-                    enable = true;
-                };
-
-                telescope = {
-                    enable = true;
-                    extensions = [
-                        {
-                            name = "fzf";
-                            packages = [ pkgs.vimPlugins.telescope-fzf-native-nvim ];
-                            setup = { fzf = { fuzzy = true; }; };
-                        }
-                    ];
-                    mappings = {
-                        buffers = "<leader>fb";
-                        diagnostics = "<leader>fd";
-                        findFiles = "<leader>ff";
-
-                        gitBranches = "<leader>fvb";
-                        gitBufferCommits = "<leader>fvcb";
-                        gitCommits = "<leader>fvcm";
-
-                        liveGrep = "<leader>fs";
-                        lspDefinitions = "<leader>fD";
-                        lspDocumentSymbols = "<leader>fds";
-                        lspImplementations = "<leader>fI";
-                    };
-                };
-
-                autopairs.nvim-autopairs.enable = true;
-                utility = {
-                    direnv.enable = true;
-                    oil-nvim.gitStatus.enable = true;
-                };
-                
-                statusline.lualine.enable = true;
-                tabline.nvimBufferline = {
-                    enable = true;
-                    mappings = {
-                        closeCurrent = "<leader>bq";
-                        sortByDirectory = "<leader>bs";
-                    };
-                };
-                filetree.neo-tree = {
-                    enable = true;
-                    setupOpts = {
-                        enable_cursor_hijack = true;
-                    };
-                };
-
-                ui = {
-                    noice.enable = true;
-                    borders.enable = true;
-                    borders.globalStyle = "rounded";
-                };
-
-                visuals = {
-                    nvim-web-devicons.enable = true;
-                    blink-indent.enable = false;
-                    fidget-nvim.enable = true;
-                };
-
-                keymaps = [
-                    {
-                        key = "<Esc>";
-                        mode = [ "n" ];
-                        action = "<cmd>noh<CR><Esc>";
-                        silent = true;
-                        desc = "Clear search highlights";
-                    }
-                    {
-                        key = "<leader>tt";
-                        mode = [ "n" ];
-                        action = "<cmd>Neotree toggle<CR>";
-                        silent = true;
-                        desc = "Neotree: Toggle";
-                    }
-                    {
-                        key = "<C-s>";
-                        mode = [ "n" ];
-                        action = "<cmd>w<CR>";
-                        silent = true;
-                        desc = "Save by Ctrl+s";
-                    }
-
-
-                    {
-                        key = "<C-1>";
-                        mode = [ "n" ];
-                        action = "<cmd>BufferLineCycleNext<CR>";
-                        silent = true;
-                        desc = "Buffer: CycleNext";
-                    }
-                    {
-                        key = "<C-2>";
-                        mode = [ "n" ];
-                        action = "<cmd>BufferLineCyclePrev<CR>";
-                        silent = true;
-                        desc = "Buffer: CyclePrev";
-                    }
-
-                    {
-                        key = "<leader>f";
-                        mode = [ "n" ];
-                        action = "<cmd>lua require('conform').format()<CR>";
-                        silent = true;
-                        desc = "Format File";
-                    }
-                ];
+              };
             };
+          };
+
+          lsp = {
+            enable = true;
+            inlayHints.enable = true;
+            mappings = {
+              renameSymbol = "<F2>";
+              codeAction = "<C-.>";
+              goToDefinition = "<leader>gd";
+              goToDeclaration = "<leader>gD";
+              toggleFormatOnSave = "<leader>ltf";
+            };
+          };
+          autocomplete.blink-cmp = {
+            enable = true;
+            friendly-snippets.enable = true;
+            mappings = {
+              close = "<Esc>";
+              complete = "<C-Space>";
+              confirm = "<C-n>";
+
+              scrollDocsDown = "<C-t>";
+              scrollDocsUp = "<C-p>";
+            };
+            setupOpts = {
+              keymap = {
+                preset = "default";
+
+                "<CR>" = [
+                  "accept"
+                  "fallback"
+                ];
+
+                "<Tab>" = [
+                  "select_next"
+                  "snippet_forward"
+                  "fallback"
+                ];
+                "<S-Tab>" = [
+                  "select_prev"
+                  "snippet_backward"
+                  "fallback"
+                ];
+              };
+
+              completion.documentation.auto_show = true;
+              completion.documentation.auto_show_delay_ms = 200;
+
+              completion.menu.auto_show = true;
+            };
+          };
+          snippets.luasnip = {
+            enable = true;
+          };
+
+          languages = {
+            odin = {
+              enable = true;
+            };
+            rust = {
+              enable = true;
+              extensions.crates-nvim.enable = true;
+              format.enable = true;
+              format.type = [ "rustfmt" ];
+              treesitter.enable = true;
+            };
+            clang.enable = true;
+            python.enable = true;
+            nix.enable = true;
+          };
+
+          formatter.conform-nvim = {
+            enable = true;
+          };
+
+          telescope = {
+            enable = true;
+            extensions = [
+              {
+                name = "fzf";
+                packages = [ pkgs.vimPlugins.telescope-fzf-native-nvim ];
+                setup = {
+                  fzf = {
+                    fuzzy = true;
+                  };
+                };
+              }
+            ];
+            mappings = {
+              buffers = "<leader>fb";
+              diagnostics = "<leader>fd";
+              findFiles = "<leader>ff";
+
+              gitBranches = "<leader>fvb";
+              gitBufferCommits = "<leader>fvcb";
+              gitCommits = "<leader>fvcm";
+
+              liveGrep = "<leader>fs";
+              lspDefinitions = "<leader>fD";
+              lspDocumentSymbols = "<leader>fds";
+              lspImplementations = "<leader>fI";
+            };
+          };
+
+          autopairs.nvim-autopairs.enable = true;
+          utility = {
+            direnv.enable = true;
+            oil-nvim.gitStatus.enable = true;
+          };
+
+          statusline.lualine.enable = true;
+          tabline.nvimBufferline = {
+            enable = true;
+            mappings = {
+              closeCurrent = "<leader>bq";
+              sortByDirectory = "<leader>bs";
+            };
+          };
+          filetree.neo-tree = {
+            enable = true;
+            setupOpts = {
+              enable_cursor_hijack = true;
+            };
+          };
+
+          ui = {
+            noice.enable = true;
+            borders.enable = true;
+            borders.globalStyle = "rounded";
+          };
+
+          visuals = {
+            nvim-web-devicons.enable = true;
+            blink-indent.enable = false;
+            fidget-nvim.enable = true;
+          };
+
+          keymaps = [
+            {
+              key = "<Esc>";
+              mode = [ "n" ];
+              action = "<cmd>noh<CR><Esc>";
+              silent = true;
+              desc = "Clear search highlights";
+            }
+            {
+              key = "<leader>tt";
+              mode = [ "n" ];
+              action = "<cmd>Neotree toggle<CR>";
+              silent = true;
+              desc = "Neotree: Toggle";
+            }
+            {
+              key = "<C-s>";
+              mode = [ "n" ];
+              action = "<cmd>w<CR>";
+              silent = true;
+              desc = "Save by Ctrl+s";
+            }
+
+            {
+              key = "<C-1>";
+              mode = [ "n" ];
+              action = "<cmd>BufferLineCycleNext<CR>";
+              silent = true;
+              desc = "Buffer: CycleNext";
+            }
+            {
+              key = "<C-2>";
+              mode = [ "n" ];
+              action = "<cmd>BufferLineCyclePrev<CR>";
+              silent = true;
+              desc = "Buffer: CyclePrev";
+            }
+
+            {
+              key = "<leader>f";
+              mode = [ "n" ];
+              action = "<cmd>lua require('conform').format()<CR>";
+              silent = true;
+              desc = "Format File";
+            }
+          ];
         };
+      };
     };
 }

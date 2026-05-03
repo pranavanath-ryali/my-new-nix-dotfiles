@@ -57,6 +57,10 @@
               type = types.listOf types.str;
               default = [ ];
             };
+            bezier = mkOption {
+                type = types.listOf types.str;
+                default = [];
+            };
             animation = mkOption {
               type = types.listOf types.str;
               default = [
@@ -80,21 +84,29 @@
                     type = types.int;
                     default = 1;
                   };
+                };
+              };
+            };
 
-                  col = mkOption {
-                    default = { };
-                    type = types.submodule {
-                      options = {
-                        inactive_border = {
-                          type = types.str;
-                          default = "0xff444444";
-                        };
-                        active_border = {
-                          type = types.str;
-                          default = "0xffffffff";
-                        };
-                      };
-                    };
+            color = mkOption {
+              default = { };
+              type = types.submodule {
+                options = {
+                  inactive_border = mkOption {
+                    type = types.str;
+                    default = "0xff858585";
+                  };
+                  active_border = mkOption {
+                    type = types.str;
+                    default = "0xffffffff";
+                  };
+                  shadow_active = mkOption {
+                    type = types.str;
+                    default = "0xee1a1a1a";
+                  };
+                  shadow_inactive = mkOption {
+                    type = types.str;
+                    default = "0xee1a1a1a";
                   };
                 };
               };
@@ -127,8 +139,8 @@
                   };
 
                   dim_inactive = mkOption {
-                    type = types.float;
-                    default = 0.5;
+                    type = types.bool;
+                    default = false;
                   };
                   dim_strength = mkOption {
                     type = types.float;
@@ -166,6 +178,38 @@
                         vibrancy_darkness = mkOption {
                           type = types.float;
                           default = 0.0;
+                        };
+                      };
+                    };
+                  };
+
+                  shadow = mkOption {
+                    default = { };
+                    type = types.submodule {
+                      options = {
+                        enabled = mkOption {
+                          type = types.bool;
+                          default = true;
+                        };
+                        range = mkOption {
+                          type = types.int;
+                          default = 4;
+                        };
+                        render_power = mkOption {
+                          type = types.int;
+                          default = 3;
+                        };
+                        sharp = mkOption {
+                          type = types.bool;
+                          default = false;
+                        };
+                        offset = mkOption {
+                          type = types.str;
+                          default = "0 0";
+                        };
+                        scale = mkOption {
+                          type = types.float;
+                          default = 1.0;
                         };
                       };
                     };
@@ -247,9 +291,12 @@
               preserve_split = true;
             };
 
-            general = {
+            general = lib.recursiveUpdate {
               layout = "scrolling";
-            };
+
+              "col.inactive_border" = config.dotfiles.hyprland.color.inactive_border;
+              "col.active_border" = config.dotfiles.hyprland.color.active_border;
+            } config.dotfiles.hyprland.general;
 
             scrolling = {
               fullscreen_on_one_column = true;
@@ -257,8 +304,12 @@
               explicit_column_widths = "0.25, 0.333, 0.5, 0.667, 0.75, 1.0";
             };
 
+            bezier = config.dotfiles.hyprland.bezier;
             animation = config.dotfiles.hyprland.animation;
-            decoration = config.dotfiles.hyprland.decoration;
+            decoration = lib.recursiveUpdate {
+              shadow.color = config.dotfiles.hyprland.color.shadow_active;
+              shadow.color_inactive = config.dotfiles.hyprland.color.shadow_inactive;
+            } config.dotfiles.hyprland.decoration;
 
             "$mainMod" = "SUPER";
             bind = [
@@ -329,7 +380,8 @@
               ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
               # ",XF86MonBrightnessUp, exec, brightnessctl s 5%+"
               # ",XF86MonBrightnessDown, exec, brightnessctl s 5%-"
-            ] ++ config.dotfiles.hyprland.bindel;
+            ]
+            ++ config.dotfiles.hyprland.bindel;
 
             bindl = [
               ", XF86AudioNext, exec, playerctl next"

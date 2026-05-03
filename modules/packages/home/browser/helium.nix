@@ -1,6 +1,6 @@
 { ... }:
 {
-    flake.homeModules.heliumBrowserModule = { inputs, pkgs, lib, ... }: {
+    flake.homeModules.heliumBrowserModule = { inputs, pkgs, lib, config, ... }: {
         home.packages = [
             inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default
         ];
