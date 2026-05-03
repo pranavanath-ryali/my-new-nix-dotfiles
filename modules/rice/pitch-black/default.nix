@@ -1,12 +1,8 @@
 { ... }:
 {
   flake.nixosModules.pitchBlackRice =
-    { pkgs, self, ... }:
+    { pkgs, ... }:
     {
-      import = [
-        self.nixosModules.dunstModule
-      ];
-
       boot = {
         plymouth = {
           enable = true;
@@ -42,6 +38,7 @@
     {
       imports = [
         self.homeModules.hyprlandPitchBlackRice
+        self.homeModules.dunstModule
       ];
     };
 }

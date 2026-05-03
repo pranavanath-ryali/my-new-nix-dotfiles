@@ -1,6 +1,6 @@
 { ... }:
 {
-  flake.nixosModules.dunstModule =
+  flake.homeModules.dunstModule =
     {
       options,
       config,
@@ -13,7 +13,7 @@
     in
     {
       options.dotfiles.dunst = mkOption {
-        type = types.attr;
+        type = types.attrs;
         default = { };
       };
 
