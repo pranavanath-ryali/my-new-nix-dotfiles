@@ -17,6 +17,7 @@
         self.homeModules.waybarModule
       ];
 
+      # ======================== COMMON APPLICATIONS ========================
       config.home.packages = with pkgs; [
         nautilus
         file-roller
@@ -24,6 +25,7 @@
         zathura
       ];
 
+      # ======================== HYPRLAND ========================
       config.dotfiles.hyprland = {
         exec-once = [
           "awww-daemon"
@@ -107,5 +109,49 @@
         ];
       };
 
+      # ======================== VICINAE CONFIG ========================
+      config.dotfiles.vicinae = {
+        settings = {
+            launcher_window = {
+                # opacity = 1.0;
+                client_side_decorations = {
+                    enabled = false;
+                    # rounding = 0;
+                };
+            };
+        };
+      };
+
+      # ======================== WAYBAR CONFIG ========================
+      config.dotfiles.waybar = {
+        settings = {
+          mainBar = {
+            layer = "top";
+            position = "bottom";
+            height = 20;
+            output = [
+              "eDP-1"
+            ];
+            modules-left = [
+
+            ];
+            modules-center = [
+
+            ];
+            modules-right = [
+                "battery"
+            ];
+
+            "battery" = {
+                interval = 60;
+                states = {
+                    warning = 40;
+                    critical = 20;
+                };
+                format = "{icon} {capacity}%";
+            };
+          };
+        };
+      };
     };
 }
