@@ -13,6 +13,7 @@
         self.homeModules.fishModule
         self.homeModules.vicinaeModule
         # self.homeModules.awwwModule
+        self.homeModules.swwwModule
         self.homeModules.dunstModule
         self.homeModules.waybarModule
       ];

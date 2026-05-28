@@ -1,9 +1,11 @@
 { ... }:
 {
-    flake.homeModules.gitPitchBlackRice = { ... }: {
-        gtk = {
-            enable = true;
-            colorScheme = "dark";
-        };
+  flake.homeModules.gitPitchBlackRice =
+    { ... }:
+    {
+      gtk = {
+        enable = true;
+        colorScheme = "dark";
+      };
     };
 }

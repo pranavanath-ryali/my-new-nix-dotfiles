@@ -99,6 +99,7 @@
       strawberry
       lrcget
 
+      gdlauncher-carbon
       bottles
       discord
 
