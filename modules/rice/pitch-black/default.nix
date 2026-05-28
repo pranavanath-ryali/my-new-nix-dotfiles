@@ -44,6 +44,7 @@
     {
       imports = [
         self.homeModules.hyprlandPitchBlackRice
+        self.homeModules.gitPitchBlackRice
       ];
 
       # ======================== DUNST CONFIG ========================
