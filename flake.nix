@@ -34,10 +34,10 @@
         vicinae.url = "github:vicinaehq/vicinae";
 
         # AWWW
-        awww.url = "git+https://codeberg.org/LGFae/awww";
+        # awww.url = "git+https://codeberg.org/LGFae/awww";
     };
 
-    outputs = inputs@{ chaotic, flake-parts, import-tree, ... }: 
+    outputs = inputs@{ chaotic, flake-parts, import-tree, ... }:
     flake-parts.lib.mkFlake { inherit inputs; }
     {
         imports = [ (import-tree ./modules) ];
@@ -47,6 +47,21 @@
                 wm = "hyprland";
                 rice = "pitch-black";
             };
+        };
+
+        perSystem = { config, pkgs, ... }: {
+          devShells.default = pkgs.mkShell {
+            name = "dotfiles-env";
+
+            packages = with pkgs; [
+              git
+              nixfmt
+            ];
+
+            shellHook = ''
+              echo "Welcome to the nix development environment"
+            '';
+          };
         };
     };
 }

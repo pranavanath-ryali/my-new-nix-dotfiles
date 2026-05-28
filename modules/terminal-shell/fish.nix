@@ -4,8 +4,9 @@
         programs.fish = {
             enable = true;
             interactiveShellInit = ''
-    			set fish_greeting # Disable greeting
-    		'';
+     			set fish_greeting # Disable greeting
+        direnv hook fish | source
+      		'';
             plugins = [
                 {
                     name = "z";

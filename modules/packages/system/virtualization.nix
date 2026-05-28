@@ -2,8 +2,8 @@
     flake.nixosModules.virtualizationModule = {pkgs, ...}: {
         programs.virt-manager.enable = true;
 
-        users.groups.libvirtd.members = ["pranavanathryali"];
-        users.groups.kvm.members = [ "pranavanathryali" ];
+        users.groups.libvirtd.members = ["pranavanath"];
+        users.groups.kvm.members = [ "pranavanath" ];
 
         virtualisation = {
             libvirtd.enable = true;
@@ -22,6 +22,6 @@
             virt-viewer
         ];
 
-        users.users.pranavanathryali.extraGroups = ["libvirtd"];
+        users.users.pranavanath.extraGroups = ["libvirtd"];
     };
 }

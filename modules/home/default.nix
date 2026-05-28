@@ -1,6 +1,6 @@
 { inputs, self, globalSettings, lib, ... }:
 {
-  flake.homeConfigurations.pranavanathryali = inputs.home-manager.lib.homeManagerConfiguration {
+  flake.homeConfigurations.pranavanath = inputs.home-manager.lib.homeManagerConfiguration {
     pkgs = import inputs.nixpkgs {
       system = "x86_64-linux";
       config.allowUnfree = true;
@@ -12,8 +12,8 @@
     modules = [
       self.homeModules.homeModule
       {
-        home.username = "pranavanathryali";
-        home.homeDirectory = "/home/pranavanathryali";
+        home.username = "pranavanath";
+        home.homeDirectory = "/home/pranavanath";
         home.stateVersion = "25.11";
       }
     ];
@@ -40,7 +40,7 @@
 
       programs.home-manager.enable = true;
 
-      home.file."/home/pranavanathryali/platform_power_profile.sh" = {
+      home.file."/home/pranavanath/platform_power_profile.sh" = {
         executable = true;
         text = ''
           FILE="/sys/firmware/acpi/platform_profile"
@@ -70,7 +70,7 @@
       };
 
       wayland.windowManager.hyprland.settings.exec-once = lib.mkAfter [
-        "bash /home/pranavanathryali/platform_power_profile.sh"
+        "bash /home/pranavanath/platform_power_profile.sh"
       ];
     };
 }

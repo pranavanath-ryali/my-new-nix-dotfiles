@@ -46,6 +46,7 @@
         self.homeModules.hyprlandPitchBlackRice
       ];
 
+      # ======================== DUNST CONFIG ========================
       config.dotfiles.dunst = {
         global = {
           width = "350";
@@ -56,6 +57,54 @@
           transparency = 10;
           frame_color = "#eceff1";
           font = "MartianMono NF 8";
+        };
+      };
+
+      # ======================== VICINAE CONFIG ========================
+      config.dotfiles.vicinae = {
+        settings = {
+          launcher_window = {
+            # opacity = 1.0;
+            client_side_decorations = {
+              enabled = false;
+              # rounding = 0;
+            };
+          };
+        };
+      };
+
+      # ======================== KITTY CONFIG ========================
+      config.programs.kitty.themeFile = "Hurtado";
+
+      # ======================== WAYBAR CONFIG ========================
+      config.dotfiles.waybar = {
+        settings = {
+          mainBar = {
+            layer = "top";
+            position = "bottom";
+            height = 20;
+            output = [
+              "eDP-1"
+            ];
+            modules-left = [
+
+            ];
+            modules-center = [
+
+            ];
+            modules-right = [
+              "battery"
+            ];
+
+            "battery" = {
+              interval = 60;
+              states = {
+                warning = 40;
+                critical = 20;
+              };
+              format = "{icon} {capacity}%";
+            };
+          };
         };
       };
     };

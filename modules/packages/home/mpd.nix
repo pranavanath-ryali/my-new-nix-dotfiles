@@ -24,7 +24,7 @@
             mpdris2-rs
 
             mpd
-            mpc 
+            mpc
             sutils
         ];
 
@@ -33,7 +33,7 @@
             package = pkgs.rmpc;
         };
 
-        home.file."/home/pranavanathryali/.config/rmpc/config.ron".text = ''
+        home.file."/home/pranavanath/.config/rmpc/config.ron".text = ''
 #![enable(implicit_some)]
 #![enable(unwrap_newtypes)]
 #![enable(unwrap_variant_newtypes)]
@@ -251,7 +251,7 @@
 )
     '';
 
-    home.file."/home/pranavanathryali/.config/rmpc/themes/default.ron".text = ''
+    home.file."/home/pranavanath/.config/rmpc/themes/default.ron".text = ''
 #![enable(implicit_some)]
 #![enable(unwrap_newtypes)]
 #![enable(unwrap_variant_newtypes)]

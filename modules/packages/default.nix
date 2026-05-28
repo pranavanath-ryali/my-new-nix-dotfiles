@@ -69,13 +69,13 @@
     ...
   }: {
     imports = [
-      self.homeModules.direnvModule
       self.homeModules.heliumBrowserModule
-      self.homeModules.musicModule
+      self.homeModules.direnvModule
+      # self.homeModules.musicModule
       self.homeModules.nvfModule
-      self.homeModules.neovideModule
+      # self.homeModules.neovideModule
       self.homeModules.mpvModule
-      self.homeModules.prismLauncherModule
+      # self.homeModules.prismLauncherModule
     ];
 
     home.packages = with pkgs; [
@@ -101,6 +101,8 @@
 
       bottles
       discord
+
+      davinci-resolve
     ];
   };
 }

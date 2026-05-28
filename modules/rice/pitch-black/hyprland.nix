@@ -12,7 +12,7 @@
         self.homeModules.kittyModule
         self.homeModules.fishModule
         self.homeModules.vicinaeModule
-        self.homeModules.awwwModule
+        # self.homeModules.awwwModule
         self.homeModules.dunstModule
         self.homeModules.waybarModule
       ];
@@ -99,6 +99,7 @@
         };
 
         bind = [
+          "$mainMod, E, exec, nautilus"
           "$mainMod, RETURN, exec, kitty"
 
           "$mainMod, SPACE, exec, vicinae toggle"
@@ -107,51 +108,6 @@
           ",XF86MonBrightnessUp, exec, brightnessctl s 1%+"
           ",XF86MonBrightnessDown, exec, brightnessctl s 1%-"
         ];
-      };
-
-      # ======================== VICINAE CONFIG ========================
-      config.dotfiles.vicinae = {
-        settings = {
-            launcher_window = {
-                # opacity = 1.0;
-                client_side_decorations = {
-                    enabled = false;
-                    # rounding = 0;
-                };
-            };
-        };
-      };
-
-      # ======================== WAYBAR CONFIG ========================
-      config.dotfiles.waybar = {
-        settings = {
-          mainBar = {
-            layer = "top";
-            position = "bottom";
-            height = 20;
-            output = [
-              "eDP-1"
-            ];
-            modules-left = [
-
-            ];
-            modules-center = [
-
-            ];
-            modules-right = [
-                "battery"
-            ];
-
-            "battery" = {
-                interval = 60;
-                states = {
-                    warning = 40;
-                    critical = 20;
-                };
-                format = "{icon} {capacity}%";
-            };
-          };
-        };
       };
     };
 }

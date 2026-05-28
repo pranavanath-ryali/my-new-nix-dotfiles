@@ -187,7 +187,7 @@
       "screenOverrides": []
     },
     "general": {
-      "avatarImage": "/home/pranavanathryali/.face",
+      "avatarImage": "/home/pranavanath/.face",
       "dimmerOpacity": 0.25,
       "showScreenCorners": false,
       "forceBlackScreenCorners": false,
@@ -224,28 +224,13 @@
       "lockScreenBlur": 0.7000000000000001,
       "lockScreenTint": 0.2,
       "keybinds": {
-        "keyUp": [
-          "Up"
-        ],
-        "keyDown": [
-          "Down"
-        ],
-        "keyLeft": [
-          "Left"
-        ],
-        "keyRight": [
-          "Right"
-        ],
-        "keyEnter": [
-          "Return",
-          "Enter"
-        ],
-        "keyEscape": [
-          "Esc"
-        ],
-        "keyRemove": [
-          "Del"
-        ]
+        "keyUp": ["Up"],
+        "keyDown": ["Down"],
+        "keyLeft": ["Left"],
+        "keyRight": ["Right"],
+        "keyEnter": ["Return", "Enter"],
+        "keyEscape": ["Esc"],
+        "keyRemove": ["Del"]
       },
       "reverseScroll": false
     },
@@ -296,7 +281,7 @@
     "wallpaper": {
       "enabled": true,
       "overviewEnabled": false,
-      "directory": "/home/pranavanathryali/Pictures/Wallpapers",
+      "directory": "/home/pranavanath/Pictures/Wallpapers",
       "monitorDirectories": [],
       "enableMultiMonitorDirectories": false,
       "showHiddenFiles": false,
@@ -599,11 +584,7 @@
       "autoHideMs": 2000,
       "overlayLayer": true,
       "backgroundOpacity": 0.15,
-      "enabledTypes": [
-        0,
-        1,
-        2
-      ],
+      "enabledTypes": [0, 1, 2],
       "monitors": []
     },
     "audio": {
@@ -710,7 +691,7 @@
     "openedPanel": "",
     "lockScreenActive": false,
     "wallpapers": {
-      "eDP-1": "/home/pranavanathryali/Pictures/Wallpapers/rose-pine sky beach dark.png"
+      "eDP-1": "/home/pranavanath/Pictures/Wallpapers/rose-pine sky beach dark.png"
     },
     "desktopWidgetsEditMode": true,
     "display": {

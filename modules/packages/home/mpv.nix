@@ -4,19 +4,28 @@
         programs.mpv = {
             enable = true;
 
-            package = (
-                pkgs.mpv-unwrapped.wrapper {
-                    scripts = with pkgs.mpvScripts; [
-                        uosc
-                        sponsorblock
-                    ];
+            # package = (
+            #     pkgs.mpv.override {
+            #         scripts = with pkgs.mpvScripts; [
+            #             uosc
+            #             sponsorblock
+            #         ];
 
-                    mpv = pkgs.mpv-unwrapped.override {
-                        ffmpeg = pkgs.ffmpeg-full;
-                        waylandSupport = true;
-                    };
-                }
-            );
+            #         mpv = pkgs.mpv-unwrapped.override {
+            #             ffmpeg = pkgs.ffmpeg-full;
+            #             waylandSupport = true;
+            #         };
+            #     }
+            # );
+
+            # package = (
+            #   pkgs.mpv.override {
+            #     scripts = with pkgs.mpvScripts [
+            #       uosc
+            #       sponsorblock
+            #     ];
+            #   }
+            # );
 
             config = {
                 profile = "high-quality";

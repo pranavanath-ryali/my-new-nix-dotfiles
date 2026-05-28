@@ -80,9 +80,9 @@
         "flakes"
       ];
 
-      users.users.pranavanathryali = {
+      users.users.pranavanath = {
         isNormalUser = true;
-        description = "pranavanathryali";
+        description = "pranavanath";
         extraGroups = [
           "networkmanager"
           "wheel"

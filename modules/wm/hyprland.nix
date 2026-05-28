@@ -244,7 +244,7 @@
           package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
           portalPackage =
             inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-
+          # configType = "hyprlang";
           settings = {
             monitor = [
               "eDP-1,preferred,0x0,1.0"
@@ -286,11 +286,6 @@
               "3, vertical, workspace"
             ];
 
-            dwindle = {
-              pseudotile = true;
-              preserve_split = true;
-            };
-
             general = lib.recursiveUpdate {
               layout = "scrolling";
 
@@ -323,11 +318,11 @@
               "$mainMod, F11, fullscreen,"
               "$mainMod SHIFT, F11, fullscreenstate, 0 2"
 
-              "$mainMod, F1, exec, bash /home/pranavanathryali/hyprland_battery.sh"
+              "$mainMod, F1, exec, bash /home/pranavanath/hyprland_battery.sh"
 
               # TODO: Screenshots
-              "$mainMod SHIFT, PRINT, exec, hyprshot -m region -o /home/pranavanathryali/Pictures/Screenshots/" # TODO: Declare a global username variable
-              ", PRINT, exec, hyprshot -m active -m output -o /home/pranavanathryali/Pictures/Screenshots/"
+              "$mainMod SHIFT, PRINT, exec, hyprshot -m region -o /home/pranavanath/Pictures/Screenshots/" # TODO: Declare a global username variable
+              ", PRINT, exec, hyprshot -m active -m output -o /home/pranavanath/Pictures/Screenshots/"
 
               "$mainMod, 1, workspace, 1"
               "$mainMod, 2, workspace, 2"
@@ -397,7 +392,7 @@
           };
         };
 
-        home.file."/home/pranavanathryali/hyprland_battery.sh" = {
+        home.file."/home/pranavanath/hyprland_battery.sh" = {
           executable = true;
           text = ''
             #!/usr/bin/env sh
