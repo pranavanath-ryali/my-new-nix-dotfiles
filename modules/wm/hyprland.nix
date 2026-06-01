@@ -1,4 +1,4 @@
-{ ... }:
+{ userSettings, ... }:
 {
   flake.nixosModules.hyprlandModule =
     {
@@ -43,6 +43,7 @@
       pkgs,
       config,
       lib,
+      # userSettings,
       ...
     }:
     let
@@ -58,8 +59,8 @@
               default = [ ];
             };
             bezier = mkOption {
-                type = types.listOf types.str;
-                default = [];
+              type = types.listOf types.str;
+              default = [ ];
             };
             animation = mkOption {
               type = types.listOf types.str;
@@ -244,6 +245,9 @@
           package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
           portalPackage =
             inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+          plugins = [
+            inputs.hyprspace.packages.${pkgs.stdenv.hostPlatform.system}.Hyprspace
+          ];
           # configType = "hyprlang";
           settings = {
             monitor = [
@@ -312,17 +316,17 @@
               "$mainMod, Q, killactive,"
               "$mainMod, M, layoutmsg, colresize 1.0"
               "$mainMod, V, togglefloating,"
-
               "$mainMod SHIFT, DELETE, exit"
-
               "$mainMod, F11, fullscreen,"
               "$mainMod SHIFT, F11, fullscreenstate, 0 2"
 
-              "$mainMod, F1, exec, bash /home/pranavanath/hyprland_battery.sh"
+              "$mainMod, TAB, overview:toggle"
+
+              "$mainMod, F1, exec, bash /home/${userSettings.username}/hyprland_battery.sh"
 
               # TODO: Screenshots
-              "$mainMod SHIFT, PRINT, exec, hyprshot -m region -o /home/pranavanath/Pictures/Screenshots/" # TODO: Declare a global username variable
-              ", PRINT, exec, hyprshot -m active -m output -o /home/pranavanath/Pictures/Screenshots/"
+              "$mainMod SHIFT, PRINT, exec, hyprshot -m region -o /home/${userSettings.username}/Pictures/Screenshots/" # TODO: Declare a global username variable
+              ", PRINT, exec, hyprshot -m active -m output -o /home/${userSettings.username}/Pictures/Screenshots/"
 
               "$mainMod, 1, workspace, 1"
               "$mainMod, 2, workspace, 2"

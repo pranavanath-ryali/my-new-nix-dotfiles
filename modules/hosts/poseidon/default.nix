@@ -2,6 +2,7 @@
   inputs,
   self,
   globalSettings,
+  userSettings,
   ...
 }:
 {
@@ -21,13 +22,6 @@
       self.nixosModules.bluetoothModule
       self.nixosModules.printingModule
       self.nixosModules.pipewireModule
-
-      # self.nixosModules.basePackages
-      # self.nixosModules.syncthingModule
-      # self.nixosModules.flatpakModule
-
-      # Load wm and rice based on what is being used
-      # self.nixosModules.defaultNoctaliaHyprland
     ];
   };
 
@@ -43,8 +37,6 @@
       imports = [
         self.nixosModules.basePackages
         self.nixosModules.syncthingModule
-
-        # self.nixosModules.defaultNoctaliaHyprland
       ]
       # Load wm
       ++ lib.optional (globalSettings.wm == "hyprland") self.nixosModules.hyprlandModule
@@ -80,9 +72,9 @@
         "flakes"
       ];
 
-      users.users.pranavanath = {
+      users.users.${userSettings.username} = {
         isNormalUser = true;
-        description = "pranavanath";
+        description = "${userSettings.username}";
         extraGroups = [
           "networkmanager"
           "wheel"

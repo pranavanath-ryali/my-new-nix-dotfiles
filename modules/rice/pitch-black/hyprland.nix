@@ -29,6 +29,7 @@
       # ======================== HYPRLAND ========================
       config.dotfiles.hyprland = {
         exec-once = [
+          "waybar"
           "awww-daemon"
         ];
 
@@ -70,7 +71,6 @@
           border_size = 4;
           gaps_in = 8;
           gaps_out = 18;
-
         };
 
         decoration = {

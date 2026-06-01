@@ -1,9 +1,10 @@
-{ ... }:
+{ userSettings, ... }:
 {
     flake.homeModules.musicModule = { pkgs, ... }: {
         services.mpd = {
             enable = true;
-            musicDirectory = "/mnt/local_disk/music";
+            # musicDirectory = "/mnt/local_disk/music";
+            musicDirectory = "/home/${userSettings.username}/Music";
             extraConfig =
             ''
                 audio_output {
@@ -33,7 +34,7 @@
             package = pkgs.rmpc;
         };
 
-        home.file."/home/pranavanath/.config/rmpc/config.ron".text = ''
+        home.file."/home/${userSettings.username}/.config/rmpc/config.ron".text = ''
 #![enable(implicit_some)]
 #![enable(unwrap_newtypes)]
 #![enable(unwrap_variant_newtypes)]
@@ -42,7 +43,7 @@
     password: None,
     theme: Some("default"),
     cache_dir: None,
-    lyrics_dir: Some("/mnt/local_disk/music"),
+    lyrics_dir: Some("/home/${userSettings.username}/Music"),
     on_song_change: None,
     volume_step: 5,
     max_fps: 30,
@@ -251,7 +252,7 @@
 )
     '';
 
-    home.file."/home/pranavanath/.config/rmpc/themes/default.ron".text = ''
+    home.file."/home/${userSettings.username}/.config/rmpc/themes/default.ron".text = ''
 #![enable(implicit_some)]
 #![enable(unwrap_newtypes)]
 #![enable(unwrap_variant_newtypes)]

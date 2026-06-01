@@ -1,11 +1,22 @@
 { ... }:
 {
-    flake.homeModules.neovideModule = { ... }: {
-        programs.neovide = {
-            enable = true;
-            settings = {
-                font.size = 12.0;
-            };
-        };    
+  flake.homeModules.neovideModule =
+    { config, lib, ... }:
+    {
+      programs.neovide = {
+        enable = true;
+        settings = {
+          linespace = 2;
+
+          font = {
+            normal = [ "CaskaydiaCove Nerd Font" ];
+            size = 12.0;
+          };
+        };
+      };
+
+      wayland.windowManager.hyprland.settings.bind = lib.mkAfter [
+        "$mainMod, N, exec, neovide"
+      ];
     };
 }

@@ -58,33 +58,6 @@
             indent.enable = false;
           };
 
-          # lazy.plugins = {
-          #   minuet = {
-          #     package = pkgs.vimPlugins.minuet-ai-nvim;
-          #     setupModule = "minuet";
-          #     after = "print('hello. from minuet')";
-          #
-          #     setupOpts = {
-          #       provider = "openai_fim_compatible";
-          #       n_completions = 1;
-          #
-          #       context_window = 512;
-          #       provider_options = {
-          #         openai_fim_compatible = {
-          #           api_key = "TERM";
-          #           name = "Ollama";
-          #           end_point = "http://localhost:11434/v1/completions";
-          #           model = "qwen2.5-coder:1.5b";
-          #           optional = {
-          #             max_tokens = 56;
-          #             top_p = 0.9;
-          #           };
-          #         };
-          #       };
-          #     };
-          #   };
-          # };
-
           lsp = {
             enable = true;
             inlayHints.enable = true;
@@ -189,6 +162,7 @@
 
           autopairs.nvim-autopairs.enable = true;
           utility = {
+            sleuth.enable = true;
             direnv.enable = true;
             oil-nvim.gitStatus.enable = true;
           };
@@ -207,7 +181,8 @@
               enable_cursor_hijack = true;
             };
           };
-
+        
+          projects.project-nvim.enable = true;
           ui = {
             noice.enable = true;
             borders.enable = true;
@@ -216,7 +191,7 @@
 
           visuals = {
             nvim-web-devicons.enable = true;
-            blink-indent.enable = false;
+            blink-indent.enable = true;
             fidget-nvim.enable = true;
           };
 
@@ -234,6 +209,13 @@
               action = "<cmd>Neotree toggle<CR>";
               silent = true;
               desc = "Neotree: Toggle";
+            }
+            {
+              key = "<leader>fp";
+              mode = [ "n" ];
+              action = "<cmd>Telescope projects<CR>";
+              silent = true;
+              desc = "Telescope: projects";
             }
             {
               key = "<C-s>";

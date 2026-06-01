@@ -1,9 +1,9 @@
-{ ... }:
+{ userSettings, ... }:
 {
     flake.nixosModules.nhModule = { ... }: {
         programs.nh = {
           enable = true;
-          flake = "/home/pranavanath/.dotfiles";
+          flake = "/home/userSettings.username/.dotfiles";
         };
     };
 }

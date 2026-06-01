@@ -1,109 +1,121 @@
-{...}: {
-  flake.nixosModules.basePackages = {
-    self,
-    pkgs,
-    ...
-  }: {
-    imports = [
-      self.nixosModules.direnvModule
-      self.nixosModules.steamModule
-      self.nixosModules.waydroidModule
-      self.nixosModules.flatpakModule
-      self.nixosModules.nixosContainerModule
-      self.nixosModules.virtualizationModule
-      self.nixosModules.nhModule
-    ];
+{ globalSettings, ... }:
+{
+  flake.nixosModules.basePackages =
+    {
+      self,
+      pkgs,
+      ...
+    }:
+    {
+      imports = [
+        self.nixosModules.direnvModule
+        self.nixosModules.steamModule
+        self.nixosModules.waydroidModule
+        self.nixosModules.flatpakModule
+        self.nixosModules.nixosContainerModule
+        self.nixosModules.virtualizationModule
+        self.nixosModules.nhModule
+      ];
 
-    environment.systemPackages = with pkgs; [
-      zed-editor
+      environment.systemPackages = with pkgs; [
+        gsettings-desktop-schemas
+        zed-editor
 
-      powertop
-      nvme-cli
+        powertop
+        nvme-cli
 
-      btop
-      htop
-      ranger
-      grc
-      ripgrep
-      bat
-      pciutils
-      ispell
-      inotify-tools
-      libnotify
-      wireplumber
-      qjackctl
-      pavucontrol
+        btop
+        htop
+        ranger
+        grc
+        ripgrep
+        bat
+        pciutils
+        ispell
+        inotify-tools
+        libnotify
+        wireplumber
+        qjackctl
+        pavucontrol
 
-      git
-      gh
+        git
+        gh
 
-      vim
-      wget
-      curl
-      unzip
-      cmatrix
+        vim
+        wget
+        curl
+        unzip
+        cmatrix
 
-      gcc
+        gcc
 
-      jack2
-      qjackctl
+        jack2
+        qjackctl
 
-      adw-gtk3
-      papirus-icon-theme
-    ];
+        adw-gtk3
+        papirus-icon-theme
+      ];
 
-    fonts.packages = with pkgs; [
-      nerd-fonts.jetbrains-mono
-      nerd-fonts.caskaydia-cove
+      programs.dconf.enable = true;
 
-      montserrat
-      garamond-libre
-      merriweather
-    ];
-  };
+      fonts.packages = with pkgs; [
+        nerd-fonts.jetbrains-mono
+        nerd-fonts.caskaydia-cove
 
-  flake.homeModules.basePackages = {
-    self,
-    pkgs,
-    inputs,
-    ...
-  }: {
-    imports = [
-      self.homeModules.heliumBrowserModule
-      self.homeModules.direnvModule
-      # self.homeModules.musicModule
-      self.homeModules.nvfModule
-      # self.homeModules.neovideModule
-      self.homeModules.mpvModule
-      # self.homeModules.prismLauncherModule
-    ];
+        montserrat
+        garamond-libre
+        merriweather
+      ];
+    };
 
-    home.packages = with pkgs; [
-      lazygit
-      wl-gammactl
-      imagemagick
-      inotify-tools
-      libnotify
+  flake.homeModules.basePackages =
+    {
+      self,
+      pkgs,
+      inputs,
+      lib,
+      ...
+    }:
+    {
+      imports = [
+        self.homeModules.direnvModule
+        self.homeModules.musicModule
+        self.homeModules.nvfModule
+        self.homeModules.neovideModule
+        self.homeModules.mpvModule
+      ]
+      # Load browser
+      ++ lib.optional (globalSettings.browser == "helium") self.homeModules.heliumBrowserModule
+      ++ lib.optional (globalSettings.browser == "zen") self.homeModules.zenBrowserModule;
 
-      vim
-      neovim
-      ollama
-      localsend
-      vscode
-      obsidian
+      home.packages = with pkgs; [
+        google-chrome
+        lazygit
+        wl-gammactl
+        imagemagick
+        inotify-tools
+        libnotify
+        cava
 
-      libreoffice
-      calibre
+        vim
+        neovim
+        ollama
+        localsend
+        vscode
+        obsidian
 
-      easyeffects
-      strawberry
-      lrcget
+        libreoffice
+        calibre
 
-      gdlauncher-carbon
-      bottles
-      discord
+        easyeffects
+        strawberry
+        lrcget
 
-      davinci-resolve
-    ];
-  };
+        bottles
+        discord
+
+        obs-studio
+        davinci-resolve
+      ];
+    };
 }

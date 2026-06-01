@@ -1,37 +1,61 @@
 { inputs, ... }:
 {
-    flake.nixosModules.poseidonMachineModule = { config, lib, pkgs, modulesPath, ... }:
+  flake.nixosModules.poseidonMachineModule =
     {
-        hardware.enableRedistributableFirmware = true;
+      config,
+      lib,
+      pkgs,
+      modulesPath,
+      ...
+    }:
+    {
+      hardware.enableRedistributableFirmware = true;
 
-        # swapDevices = [
-        #     {
-        #         device = "/var/lib/swapfile";
-        #         size = 18 * 1024;
-        #     }
-        # ];
+      # swapDevices = [
+      #     {
+      #         device = "/var/lib/swapfile";
+      #         size = 18 * 1024;
+      #     }
+      # ];
 
-        powerManagement.enable = true;
+      powerManagement.enable = true;
 
-        boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" ];
-        boot.initrd.kernelModules = [ ];
-        boot.kernelModules = [ "kvm-intel" ];
-        boot.extraModulePackages = [ ];
+      boot.initrd.availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "nvme"
+        "usb_storage"
+        "sd_mod"
+      ];
+      boot.initrd.kernelModules = [ ];
+      boot.kernelModules = [ "kvm-intel" ];
+      boot.extraModulePackages = [ ];
 
-        fileSystems."/" =
-          { device = "/dev/disk/by-uuid/3b327c6e-dc61-4035-b867-5425795f8c1a";
-            fsType = "ext4";
-          };
+      fileSystems."/" = {
+        device = "/dev/disk/by-uuid/3b327c6e-dc61-4035-b867-5425795f8c1a";
+        fsType = "ext4";
+      };
 
-        fileSystems."/boot" =
-          { device = "/dev/disk/by-uuid/513D-5EB7";
-            fsType = "vfat";
-            options = [ "fmask=0077" "dmask=0077" ];
-          };
+      fileSystems."/boot" = {
+        device = "/dev/disk/by-uuid/513D-5EB7";
+        fsType = "vfat";
+        options = [
+          "fmask=0077"
+          "dmask=0077"
+        ];
+      };
 
-        swapDevices = [ ];
+      swapDevices = [
+        {
+          device = "/var/lib/swapfile";
+          size = 20 * 1024; # 16 GiB
+        }
+      ];
 
-        nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-        hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+      boot.kernelParams = [ "resume_offset=62187520" ];
+      boot.resumeDevice = "/dev/disk/by-uuid/3b327c6e-dc61-4035-b867-5425795f8c1a";
+
+      nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+      hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     };
 }
