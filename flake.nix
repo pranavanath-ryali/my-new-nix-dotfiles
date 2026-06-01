@@ -13,16 +13,16 @@
     # Hyprland
     hyprland.url = "github:hyprwm/Hyprland";
 
-    noctalia.url = "github:noctalia-dev/noctalia-shell";
-    noctalia.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # noctalia.url = "github:noctalia-dev/noctalia-shell";
+    # noctalia.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     # NVF
     nvf.url = "github:NotAShelf/nvf";
     nvf.inputs.nixpkgs.follows = "nixpkgs";
 
     # Zen Browser
-    zen-browser.url = "github:youwen5/zen-browser-flake";
-    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+    # zen-browser.url = "github:youwen5/zen-browser-flake";
+    # zen-browser.inputs.nixpkgs.follows = "nixpkgs";
 
     # Helium Browser
     helium.url = "github:schembriaiden/helium-browser-nix-flake";
