@@ -27,7 +27,11 @@
           inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
       };
 
-      services.displayManager.gdm.enable = true;
+      services.displayManager.sddm = {
+        enable = true;
+        wayland.enable = true;
+      };
+      # services.displayManager.gdm.enable = true;
       services.gnome.gnome-keyring.enable = true;
 
       # Mountable Drives
