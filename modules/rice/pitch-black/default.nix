@@ -28,6 +28,18 @@
         loader.timeout = 0;
       };
 
+      environment.systemPackages = with pkgs; [
+        where-is-my-sddm-theme
+      ];
+
+      services.displayManager.sddm = {
+        enable = true;
+        wayland.enable = true;
+
+        theme = "where_is_my_sddm_theme";
+        extraPackages = [ pkgs.where-is-my-sddm-theme ];
+      };
+
       fonts.packages = with pkgs; [
         nerd-fonts.martian-mono
         nerd-fonts.iosevka
@@ -54,11 +66,26 @@
         font = {
           name = "MartianMono NF";
           package = pkgs.nerd-fonts.martian-mono;
-          size = 9;
+          size = 8;
+        };
+        iconTheme = {
+          name = "Colloid-Grey-Dark";
+          package = (
+            pkgs.colloid-icon-theme.override {
+              colorVariants = [ "grey" ];
+            }
+          );
         };
         theme = {
-          name = "Cloudy-Grey-Dark";
-          package = pkgs.callPackage ../../../derivations/cloudy-gtk-theme.nix {};
+          name = "Jasper-Grey-Dark-Compact";
+          package = (
+            pkgs.jasper-gtk-theme.override {
+              tweaks = [ "black" ];
+              sizeVariants = [ "compact" ];
+              themeVariants = [ "grey" ];
+              colorVariants = [ "dark" ];
+            }
+          );
         };
       };
 
