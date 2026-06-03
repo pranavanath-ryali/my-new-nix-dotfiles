@@ -58,7 +58,7 @@
         };
         theme = {
           name = "Cloudy-Grey-Dark";
-          package = pkgs.callPackage ../../packages/derivations/cloudy-gtk-theme.nix {};
+          package = pkgs.callPackage ../../../derivations/cloudy-gtk-theme.nix {};
         };
       };
 
