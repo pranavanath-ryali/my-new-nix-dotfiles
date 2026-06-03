@@ -250,10 +250,6 @@
           portalPackage =
             inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
           configType = "hyprlang";
-          # plugins = [
-          #   inputs.hyprspace.packages.${pkgs.stdenv.hostPlatform.system}.Hyprspace
-          # ];
-          # configType = "hyprlang";
           settings = {
             monitor = [
               "eDP-1,preferred,0x0,1.0"
@@ -324,8 +320,6 @@
               "$mainMod SHIFT, DELETE, exit"
               "$mainMod, F11, fullscreen,"
               "$mainMod SHIFT, F11, fullscreenstate, 0 2"
-
-              "$mainMod, TAB, overview:toggle"
 
               "$mainMod, F1, exec, bash /home/${userSettings.username}/hyprland_battery.sh"
 

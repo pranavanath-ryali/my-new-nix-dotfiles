@@ -13,7 +13,7 @@
         self.nixosModules.waydroidModule
         self.nixosModules.flatpakModule
         self.nixosModules.nixosContainerModule
-        # self.nixosModules.virtualizationModule
+        self.nixosModules.virtualizationModule
         self.nixosModules.nhModule
       ];
 

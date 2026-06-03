@@ -47,6 +47,21 @@
         self.homeModules.gitPitchBlackRice
       ];
 
+      # ======================== GTK CONFIG ========================
+      config.gtk = {
+        enable = true;
+        colorScheme = "dark";
+        font = {
+          name = "MartianMono NF";
+          package = pkgs.nerd-fonts.martian-mono;
+          size = 9;
+        };
+        theme = {
+          name = "Cloudy-Grey-Dark";
+          package = pkgs.callPackage ../../packages/derivations/cloudy-gtk-theme.nix {};
+        };
+      };
+
       # ======================== DUNST CONFIG ========================
       config.dotfiles.dunst = {
         global = {
@@ -65,10 +80,10 @@
       config.dotfiles.vicinae = {
         settings = {
           launcher_window = {
-            # opacity = 1.0;
+            opacity = 1.0;
             client_side_decorations = {
               enabled = false;
-              # rounding = 0;
+              rounding = 0;
             };
           };
         };
@@ -80,28 +95,28 @@
       # ======================== WAYBAR CONFIG ========================
       config.dotfiles.waybar = {
         style = ''
-* {
-  border: none;
-  border-radius: 0;
-  font-family: monospace;
-  font-size: 12px;
-  font-weight: bold;
-  min-height: 0;
+          * {
+            border: none;
+            border-radius: 0;
+            font-family: monospace;
+            font-size: 12px;
+            font-weight: bold;
+            min-height: 0;
 
-  margin: 0rem 0.1rem;
-}
+            margin: 0rem 0.1rem;
+          }
 
-window#waybar {
-  background: rgba(0, 0, 0, 1.0);
-  color: white;
-}
+          window#waybar {
+            background: rgba(0, 0, 0, 1.0);
+            color: white;
+          }
 
-#battery, #clock, #memory, #cpu, #mpd, #cava {
-  padding: 0 0.5rem;
-}
-#battery.charging {
-  color: rgba(142, 111, 44, 1.0);
-}
+          #battery, #clock, #memory, #cpu, #mpd, #cava {
+            padding: 0 0.5rem;
+          }
+          #battery.charging {
+            color: rgba(142, 111, 44, 1.0);
+          }
         '';
         settings = {
           mainBar = {
