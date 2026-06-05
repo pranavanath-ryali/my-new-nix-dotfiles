@@ -1,7 +1,7 @@
 { ... }:
 {
     flake.homeModules.zenBrowserModule = { inputs, pkgs, ... }: {
-        home.packags = [
+        home.packages = [
             inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
         ];
     };

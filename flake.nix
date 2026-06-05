@@ -21,8 +21,8 @@
     nvf.inputs.nixpkgs.follows = "nixpkgs";
 
     # Zen Browser
-    # zen-browser.url = "github:youwen5/zen-browser-flake";
-    # zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+    zen-browser.url = "github:youwen5/zen-browser-flake";
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
 
     # Helium Browser
     helium.url = "github:schembriaiden/helium-browser-nix-flake";
@@ -53,7 +53,7 @@
         globalSettings = {
           wm = "hyprland";
           rice = "pitch-black";
-          browser = "helium";
+          browser = "zen";
         };
       };
 
