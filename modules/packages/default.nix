@@ -98,6 +98,9 @@
         libnotify
         cava
 
+        qimgv
+        darktable
+
         vim
         neovim
         ollama

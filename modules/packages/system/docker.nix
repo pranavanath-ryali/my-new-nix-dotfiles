@@ -1,7 +1,7 @@
 { userSettings, ... }:
 {
   flake.nixosModules.dockerModule = { ... }: {
-    virtualization.docker.rootless = {
+    virtualisation.docker.rootless = {
       enable = true;
       setSocketVariable = true;
     };

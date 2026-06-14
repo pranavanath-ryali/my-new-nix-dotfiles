@@ -19,6 +19,12 @@
             vimPlugins.minuet-ai-nvim
           ];
 
+          clipboard = {
+            enable = true;
+            registers = "unnamedplus";
+            providers.wl-copy.enable = true;
+          };
+
           theme = {
             enable = true;
             name = "catppuccin";
@@ -37,7 +43,7 @@
             '';
           };
 
-          lineNumberMode = "relative";
+          lineNumberMode = "relNumber";
 
           viAlias = true;
           vimAlias = true;
@@ -54,8 +60,22 @@
 
           treesitter = {
             enable = true;
-            fold = true;
+            fold = false;
             indent.enable = false;
+          };
+
+          assistant = {
+            codecompanion-nvim = {
+              enable = true;
+              setupOpts = {
+                interactions = {
+                  chat = {
+                    adapter = "ollama";
+                    model = "qwen2.5-coder:1.5b";
+                  };
+                };
+              };
+            };
           };
 
           lsp = {

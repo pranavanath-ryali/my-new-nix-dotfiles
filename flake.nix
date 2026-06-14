@@ -10,6 +10,10 @@
     home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # i915-SRIOV Module
+    i915-sriov.url = "github:strongtz/i915-sriov-dkms/master";
+    i915-sriov.inputs.nixpkgs.follows = "nixpkgs";
+
     # Hyprland
     hyprland.url = "github:hyprwm/Hyprland";
 
