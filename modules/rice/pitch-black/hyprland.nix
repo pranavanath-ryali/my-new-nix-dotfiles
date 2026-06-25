@@ -25,8 +25,95 @@
         file-roller
         euphonica
         zathura
+
+        brightnessctl
       ];
 
+      # ======================== HYPRLOCK ========================
+      config.dotfiles.hyprlock.settings = {
+        background = [
+          {
+            monitor = "";
+            color = "rgb(000000)"; # Pure black background
+          }
+        ];
+
+        input-field = [
+          {
+            monitor = "";
+            size = "800, 100";
+            outline_thickness = 0;
+
+            # Dot configuration to look like standard asterisks
+            dots_size = 0.4;
+            dots_spacing = 0.5;
+            dots_center = true;
+            dots_rounding = -1;
+
+            # Hide the input box container entirely
+            fade_on_empty = false;
+            inner_color = "rgba(0, 0, 0, 0)";
+            outer_color = "rgba(0, 0, 0, 0)";
+            font_color = "rgb(255, 255, 255)";
+
+            # The blinking cursor modification
+            placeholder_text = "<span foreground=\"##ffffff\">|</span>";
+
+            # Center the input field on the screen
+            position = "0, 0";
+            halign = "center";
+            valign = "center";
+          }
+        ];
+      };
+
+      # ======================== HYPRIDLE ========================
+      config = {
+        services.hypridle = {
+          enable = true;
+
+          settings = {
+            general = {
+              lock_cmd = "pidof hyprlock || hyprlock"; # avoids starting multiple hyprlock instances
+              unlock_cmd = "killall -q hyprlock"; # unlocks when receiving an unlock event
+              before_sleep_cmd = "loginctl lock-session"; # lock screen before the system goes to sleep
+              after_sleep_cmd = "hyprctl dispatch dpms on"; # avoids having to press a key twice to wake the display
+              ignore_dbus_inhibit = false; # respect Firefox/Steam inhibitors
+            };
+
+            listener = [
+              # 1. Dim the monitor backlight (after 2.5 minutes)
+              {
+                timeout = 150;
+                on-timeout = "brightnessctl -s set 10";
+                on-resume = "brightnessctl -r";
+              }
+              # 2. Turn off keyboard backlight (after 2.5 minutes)
+              {
+                timeout = 150;
+                on-timeout = "brightnessctl -sd rgb:kbd_backlight set 0";
+                on-resume = "brightnessctl -rd rgb:kbd_backlight";
+              }
+              # 3. Lock the screen (after 5 minutes)
+              {
+                timeout = 300;
+                on-timeout = "loginctl lock-session";
+              }
+              # 4. Turn off screen via DPMS (after 5.5 minutes)
+              {
+                timeout = 330;
+                on-timeout = "hyprctl dispatch dpms off";
+                on-resume = "hyprctl dispatch dpms on";
+              }
+              # 5. Suspend PC (after 30 minutes)
+              {
+                timeout = 1800;
+                on-timeout = "systemctl suspend";
+              }
+            ];
+          };
+        };
+      };
       # ======================== HYPRLAND ========================
       config.dotfiles.hyprland = {
         exec-once = [

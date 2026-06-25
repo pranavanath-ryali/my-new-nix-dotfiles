@@ -26,7 +26,7 @@
       config = {
         programs.hyprlock = {
           enable = true;
-          settings = config.dotfiles.hyprlock;
+          settings = config.dotfiles.hyprlock.settings;
         };
       };
     };
