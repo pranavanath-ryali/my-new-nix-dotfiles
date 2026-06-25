@@ -16,6 +16,7 @@
         # self.homeModules.swwwModule
         self.homeModules.dunstModule
         self.homeModules.waybarModule
+        self.homeModules.hyprlockModule
       ];
 
       # ======================== COMMON APPLICATIONS ========================

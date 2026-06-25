@@ -131,12 +131,22 @@
             enable = true;
           };
 
+          debugger = {
+            nvim-dap = {
+              enable = true;
+              ui.enable = true;
+              ui.autoStart = true;
+            };
+          };
+
           languages = {
             odin = {
               enable = true;
             };
             rust = {
               enable = true;
+              dap.enable = true;
+
               extensions.crates-nvim.enable = true;
               format.enable = true;
               format.type = [ "rustfmt" ];

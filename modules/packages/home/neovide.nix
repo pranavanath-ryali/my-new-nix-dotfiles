@@ -10,7 +10,7 @@
 
           font = {
             normal = [ "CaskaydiaCove Nerd Font" ];
-            size = 12.0;
+            size = 10.0;
           };
         };
       };
